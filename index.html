@@ -1,6 +1,55 @@
 <!doctype html>
 <html lang="en">
 <head>
+<!-- SITE_CONFIG and Google Analytics / Consent Mode / GTM -->
+<script>
+  window.SITE_CONFIG = {
+    GTM_ID: 'GTM-XXXXXXX', // Replace with real Google Tag Manager ID
+    GA4_ID: 'G-XXXXXXXXXX', // Replace with real Google Analytics 4 ID
+    GOOGLE_ADS_ID: 'AW-XXXXXXXXXX', // Replace with real Google Ads ID
+    GOOGLE_ADS_FORM_CONVERSION_LABEL: 'AW-FORM-CONVERSION-LABEL',
+    GOOGLE_ADS_PHONE_CONVERSION_LABEL: 'AW-PHONE-CONVERSION-LABEL',
+    META_PIXEL_ID: 'PIXEL_ID_HERE'
+  };
+
+  // Google Consent Mode v2 Default Setup
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  
+  if (localStorage.getItem('luhe_consent') === null) {
+    gtag('consent', 'default', {
+      'ad_storage': 'denied',
+      'analytics_storage': 'denied',
+      'ad_user_data': 'denied',
+      'ad_personalization': 'denied',
+      'wait_for_update': 500
+    });
+  } else {
+    try {
+      var savedConsent = JSON.parse(localStorage.getItem('luhe_consent'));
+      gtag('consent', 'default', {
+        'ad_storage': savedConsent.ad_storage || 'denied',
+        'analytics_storage': savedConsent.analytics_storage || 'denied',
+        'ad_user_data': savedConsent.ad_user_data || 'denied',
+        'ad_personalization': savedConsent.ad_personalization || 'denied'
+      });
+    } catch(e) {
+      gtag('consent', 'default', {
+        'ad_storage': 'denied',
+        'analytics_storage': 'denied',
+        'ad_user_data': 'denied',
+        'ad_personalization': 'denied'
+      });
+    }
+  }
+</script>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer', window.SITE_CONFIG.GTM_ID);</script>
+<!-- End Google Tag Manager -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#0B6FB8">
@@ -249,6 +298,65 @@
     .grid{gap:14px}
   }
   @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+
+  /* Cookie Consent Banner Styling */
+  .cookie-banner {
+    position: fixed;
+    bottom: 24px;
+    left: 24px;
+    right: 24px;
+    max-width: 600px;
+    background: #fff;
+    border: 1px solid var(--line);
+    box-shadow: var(--shadow);
+    border-radius: 16px;
+    padding: 20px;
+    z-index: 9999;
+    font-family: inherit;
+    animation: slideUp 0.4s ease-out;
+  }
+  .cookie-banner-content {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .cookie-banner-content p {
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.55;
+    margin: 0;
+  }
+  .cookie-banner-content p a {
+    color: var(--blue);
+    text-decoration: underline;
+  }
+  .cookie-banner-buttons {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+  }
+  .btn-sm {
+    padding: 10px 18px;
+    font-size: 14px;
+  }
+  @keyframes slideUp {
+    from { transform: translateY(100px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+  }
+  @media (max-width: 640px) {
+    .cookie-banner {
+      bottom: 74px; /* Above mobile sticky call bar */
+      left: 12px;
+      right: 12px;
+      padding: 16px;
+    }
+    .cookie-banner-buttons {
+      width: 100%;
+    }
+    .cookie-banner-buttons button {
+      flex: 1;
+    }
+  }
 </style>
 <script type="application/ld+json">
 {
@@ -280,11 +388,12 @@
         "https://www.instagram.com/luhecarpetcleaning/",
         "https://www.facebook.com/profile.php?id=61586350434713"
       ],
-      "aggregateRating":{
-        "@type":"AggregateRating",
-        "ratingValue":"5.0",
-        "bestRating":"5",
-        "worstRating":"1"
+      "openingHours": "Mo-Sa 08:00-18:00",
+      "openingHoursSpecification": {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+        "opens": "08:00",
+        "closes": "18:00"
       },
       "description":"Carpet, sofa, upholstery, mattress, area rug and chair cleaning in Shrewsbury, Worcester, MetroWest and Central Massachusetts."
     },
@@ -309,6 +418,17 @@
 </script>
 </head>
 <body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-XXXXXXX"
+height="0" width="0" style="display:none;visibility:hidden" id="gtm-noscript"></iframe></noscript>
+<script>
+  // Dynamically update noscript iframe src if configuration matches
+  var noscriptIframe = document.getElementById('gtm-noscript');
+  if (noscriptIframe && window.SITE_CONFIG && window.SITE_CONFIG.GTM_ID) {
+    noscriptIframe.src = 'https://www.googletagmanager.com/ns.html?id=' + window.SITE_CONFIG.GTM_ID;
+  }
+</script>
+<!-- End Google Tag Manager (noscript) -->
 
 <!-- Topbar -->
 <div class="topbar" role="region" aria-label="Top info">
@@ -339,6 +459,7 @@
       <a href="#process" data-i18n="menu.process">Process</a>
       <a href="#reviews" data-i18n="menu.reviews">Reviews</a>
       <a href="#faq" data-i18n="menu.faq">FAQ</a>
+      <a href="contact.html" data-i18n="menu.contact">Contact</a>
     </div>
     <div class="nav-actions">
       <button class="menu-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="menu" id="navToggle">
@@ -379,10 +500,9 @@
     <aside class="quote-card" id="quote" aria-labelledby="quote-h">
       <h2 id="quote-h" data-i18n="form.title">Get Your Free Quote</h2>
       <p class="sub" data-i18n="form.subtitle">Send your details and we'll get back to you with a clear price.</p>
-      <form name="quote" method="POST" netlify data-netlify="true" netlify-honeypot="bot-field" data-netlify-honeypot="bot-field" action="/thank-you.html" enctype="multipart/form-data" novalidate>
-        <input type="hidden" name="form-name" value="quote">
+      <form name="quote" id="quoteForm" novalidate>
         <input type="hidden" name="lang" id="formLang" value="en">
-        <p style="position:absolute;left:-9999px"><label>Don't fill this out: <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
+        <input type="hidden" name="form-name" value="quote">
         <div class="field"><label for="f-name" data-i18n="form.name">Name</label><input id="f-name" name="name" type="text" autocomplete="name" required placeholder="Your full name" data-i18n-placeholder="form.namePh"></div>
         <div class="field"><label for="f-phone" data-i18n="form.phone">Phone</label><input id="f-phone" name="phone" type="tel" autocomplete="tel" required placeholder="(508) 555-0101"></div>
         <div class="field"><label for="f-email"><span data-i18n="form.email">Email</span> <span style="color:var(--muted);font-weight:500" data-i18n="form.optional">(optional)</span></label><input id="f-email" name="email" type="email" autocomplete="email" placeholder="you@example.com"></div>
@@ -397,7 +517,7 @@
             <option data-i18n="svc.multiple">Multiple / Not sure</option>
           </select>
         </div>
-        <div class="field"><label for="f-msg" data-i18n="form.message">What needs cleaning?</label><textarea id="f-msg" name="message" placeholder="Tell us about the rooms, fabric, stains, size of the sofa, etc." data-i18n-placeholder="form.messagePh"></textarea></div>
+        <div class="field"><label for="f-msg" data-i18n="form.message">What needs cleaning?</label><textarea id="f-msg" name="message" maxlength="1000" placeholder="Tell us about the rooms, fabric, stains, size of the sofa, etc." data-i18n-placeholder="form.messagePh"></textarea></div>
         <div class="field">
           <label for="f-photo"><span data-i18n="form.photo">Photo</span> <span style="color:var(--muted);font-weight:500" data-i18n="form.optional">(optional)</span></label>
           <div class="file-wrap">
@@ -410,8 +530,12 @@
           </div>
           <p class="form-fineprint" style="margin-top:8px" data-i18n="form.photoHelp">Upload a photo if you can. It helps us give you a faster, more accurate quote.</p>
         </div>
-        <button class="btn btn-primary btn-block btn-lg" type="submit" data-i18n="form.submit">Send Quote Request</button>
+        <div class="field" style="margin-top: 5px;">
+          <div id="form-error-banner" class="err-msg" style="display:none; text-align:center; padding:10px; border:1px solid #DC2626; border-radius:11px; background:#FEF2F2; font-weight:600; margin-bottom:10px;"></div>
+        </div>
+        <button class="btn btn-primary btn-block btn-lg" type="submit" id="btnSubmit"><span data-i18n="form.submit">Send Quote Request</span></button>
         <p class="form-fineprint"><span data-i18n="form.privacy">No spam. Your info goes straight to LuHe Carpet Cleaning.</span></p>
+        <p class="form-fineprint" style="margin-top:2px"><span data-i18n="form.privacyConsent">By submitting, you agree to our <a href="privacy-policy.html" style="color:var(--blue);text-decoration:underline;">Privacy Policy</a>.</span></p>
       </form>
     </aside>
   </div>
@@ -657,6 +781,7 @@
       <a href="tel:+15087368397">(508) 736-8397</a>
       <a href="mailto:luhecleaning@gmail.com">luhecleaning@gmail.com</a>
       <a href="https://wa.me/15087368397" target="_blank" rel="noopener">WhatsApp</a>
+      <a href="contact.html" data-i18n="foot.contactPage">Contact Page</a>
     </div>
     <div>
       <h3 data-i18n="foot.area">Service Area</h3>
@@ -676,7 +801,7 @@
     </div>
   </div>
   <div class="copyright">
-    <span>© <span id="yr">2026</span> LuHe Carpet Cleaning. <span data-i18n="foot.rights">All rights reserved.</span></span>
+    <span>© <span id="yr">2026</span> LuHe Carpet Cleaning. <span data-i18n="foot.rights">All rights reserved.</span> · <a href="privacy-policy.html" data-i18n="foot.privacy">Privacy Policy</a></span>
     <span>Shrewsbury, MA · MetroWest · Central MA</span>
   </div>
 </footer>
@@ -710,6 +835,68 @@
   var SUPPORTED=['en','pt','es'];
   var TRANSLATIONS={"en":{"top.rating":"5.0 Google Rating","top.serving":"Serving Shrewsbury, Worcester & Central MA","menu.services":"Services","menu.results":"Results","menu.process":"Process","menu.reviews":"Reviews","menu.faq":"FAQ","header.callBtn":"Call","hero.badge":"★ 5.0 Google Rating · Shrewsbury, MA","hero.h1":"Carpet & Upholstery Cleaning in Shrewsbury, Worcester & Central MA","hero.lede":"LuHe Carpet Cleaning brings carpets, sofas, mattresses, rugs and chairs back to life with deep, careful cleaning across Shrewsbury, Worcester, MetroWest and Central Massachusetts. Real results, fair pricing, no surprises.","cta.callToday":"Call Us Today","cta.textUs":"Text Us","cta.freeQuote":"Get Free Quote","cta.freeQuoteBig":"Get a Free Quote","cta.seeMore":"See More Results","trust.fiveStar":"5-Star Service","trust.affordable":"Affordable Pricing","trust.proof":"Real Before & After Proof","trust.local":"Local Family-Run Business","form.title":"Get Your Free Quote","form.subtitle":"Send your details and we'll get back to you with a clear price.","form.name":"Name","form.namePh":"Your full name","form.phone":"Phone","form.email":"Email","form.optional":"(optional)","form.service":"Service","form.selectService":"Select a service","form.message":"What needs cleaning?","form.messagePh":"Tell us about the rooms, fabric, stains, size of the sofa, etc.","form.photo":"Photo","form.photoHelp":"Upload a photo if you can. It helps us give you a faster, more accurate quote.","form.submit":"Send Quote Request","form.privacy":"No spam. Your info goes straight to LuHe Carpet Cleaning.","svc.carpet":"Carpet Cleaning","svc.sofa":"Upholstery / Sofa Cleaning","svc.mattress":"Mattress Cleaning","svc.rug":"Area Rug Cleaning","svc.chair":"Chair Cleaning","svc.multiple":"Multiple / Not sure","ey.services":"Services","ey.why":"Why people pick LuHe","ey.results":"Real Results","ey.whyShort":"Why LuHe","ey.process":"How it works","ey.reviews":"Reviews","ey.answers":"Answers","services.title":"What We Clean","services.intro":"Focused, professional cleaning for the surfaces your family uses every day.","svcCard.carpet.t":"Carpet Cleaning","svcCard.carpet.d":"Deep cleaning for room carpets, stair carpets, edges and stubborn spots in Shrewsbury, MetroWest and Central MA.","svcCard.sofa.t":"Upholstery & Sofa Cleaning","svcCard.sofa.d":"Couches, sectionals, loveseats, armrests and cushions — fabric brought back to looking and feeling fresh.","svcCard.mattress.t":"Mattress Cleaning","svcCard.mattress.d":"Lift away dust and stains from your mattress for a cleaner, healthier place to sleep.","svcCard.rug.t":"Area Rug Cleaning","svcCard.rug.d":"Decorative rugs, runners and high-traffic rugs cleaned safely without damaging the fibers.","svcCard.chair.t":"Chair Cleaning","svcCard.chair.d":"Dining chairs, armchairs, office chairs and gaming chairs cleaned where you sit every day.","proof.title":"Real Cleaning Results, Not Stock Photos","proof.intro":"Every photo on this page is from our own work in real homes around Shrewsbury, MetroWest and Central MA. What you see is what you can expect.","proofFt.proof.t":"Visible before & after proof","proofFt.proof.d":"You can judge the work before you pay for it.","proofFt.local.t":"Local service in MetroWest","proofFt.local.d":"Based in Shrewsbury, MA. We know the neighborhoods we serve.","proofFt.simple.t":"Simple to book","proofFt.simple.d":"Call, text, or fill out the quote form — that's it.","gallery.title":"Before & After","gallery.intro":"Real photos from real LuHe Carpet Cleaning jobs — sofas, chairs, stairs, rugs and carpets.","gal1.t":"Sofa Corner","gal1.d":"Upholstery cleaning on a high-use seat corner.","gal2.t":"Gray Armchair","gal2.d":"Stain lift and fabric refresh on a fabric armchair.","gal3.t":"Dark Sofa","gal3.d":"Deep cleaning for a darker upholstery sofa.","gal4.t":"Beige Sectional","gal4.d":"Family-room sectional brought back to life.","gal5.t":"Yellow Chair","gal5.d":"Clear color refresh on a fabric accent chair.","gal6.t":"Patterned Stair Carpet","gal6.d":"Detailed stair carpet cleaning, pattern restored.","gal7.t":"Full Stair Carpet","gal7.d":"Complete stair runner cleaning, top to bottom.","gal8.t":"Light Sofa","gal8.d":"Stain removal and refresh on a light fabric sofa.","gal9.t":"Stair Carpet Detail","gal9.d":"Close-up of edge and corner cleaning on stairs.","gal10.t":"Carpet Spot Removal","gal10.d":"Targeted stain treatment on residential carpet.","gal11.t":"Armrest Detail","gal11.d":"Detailed cleaning of high-contact armrests.","gal12.t":"Gaming Chair","gal12.d":"Office and gaming chair upholstery refresh.","gal13.t":"Room Carpet","gal13.d":"Full-room carpet deep cleaning for living spaces.","gal14.t":"Black Upholstery","gal14.d":"Cleaning for darker upholstery and fabric pieces.","gal15.t":"Carpet Edge","gal15.d":"Edges and corners against walls and furniture.","gal16.t":"Ottoman Cleaning","gal16.d":"Fabric ottoman and footrest cleaning.","gal17.t":"Light Sofa Refresh","gal17.d":"Another light fabric sofa cleaning result.","why.title":"A Local Cleaner You Can Trust","why.intro":"Straightforward service, fair pricing and the kind of attention to detail you'd give your own home.","whyIt.stars.t":"5-Star Reviews","whyIt.stars.d":"5.0 Google Rating from real Shrewsbury, MetroWest and Central MA customers.","whyIt.proof.t":"Real Before & After","whyIt.proof.d":"You see exactly what we delivered for other homes — no stock images, no hype.","whyIt.local.t":"Local in MetroWest","whyIt.local.d":"We know the area. Quick to schedule, careful with your home, easy to talk to.","whyIt.afford.t":"Affordable Pricing","whyIt.afford.d":"Clear quotes upfront. No pushy upsells, no hidden fees on your invoice.","process.title":"3 Simple Steps","process.intro":"From the first message to a clean carpet or sofa — without the back and forth.","step1.t":"Tell us what you need","step1.d":"Call or text us, or fill out the quick quote form. A few photos help us quote faster.","step2.t":"Get a clear quote","step2.d":"You receive an honest, affordable price before any work starts. No surprise charges.","step3.t":"We clean. You enjoy.","step3.d":"We bring our equipment, treat the carpet or upholstery on site, and leave it ready to use.","reviews.from":"Verified Google Reviews","reviews.copy":"LuHe Carpet Cleaning customers in Shrewsbury, MetroWest and Central MA consistently rate our carpet and upholstery work 5 out of 5.","reviews.read":"Read Google Reviews","reviews.leave":"Leave a Review","faq.title":"Frequently Asked Questions","faq.intro":"Quick answers before you book your cleaning.","faq1.q":"What areas does LuHe Carpet Cleaning serve?","faq1.a":"We're based in Shrewsbury, MA and serve Worcester, Northborough, Westborough, Marlborough, Natick, Bellingham, and the surrounding MetroWest and Central Massachusetts area. If you're not sure whether your town is covered, send us a message and we'll let you know.","faq2.q":"What services do you offer?","faq2.a":"We clean carpets, sofas and upholstery, mattresses, area rugs and chairs. We do not currently offer tile and grout cleaning or pet odor removal.","faq3.q":"How do I get a free quote?","faq4.q":"How much does carpet or sofa cleaning cost?","faq4.a":"Pricing depends on the size of the area and the condition of the fabric. The fastest way to get a clear price is to send a few photos with your quote request — we'll quote you back before any work starts.","faq5.q":"Do you bring everything you need?","faq5.a":"Yes. We arrive with the equipment and cleaning solutions for the job, treat the carpet or upholstery on site, and leave it ready for you to use.","faq6.q":"Where can I see more before-and-after results?","finalCta.title":"Ready to Refresh Your Carpet or Sofa?","finalCta.sub":"Free quote in minutes. Call, message or fill out the form.","foot.tagline":"Carpet, sofa and upholstery cleaning in Shrewsbury, Worcester & Central MA. 5.0 ★ Google Rating.","foot.contact":"Contact","foot.area":"Service Area","foot.services":"Services","foot.sofa":"Sofa & Upholstery","foot.rights":"All rights reserved.","mb.call":"Call Now","mb.text":"Text Us","ty.h1":"Thanks — your request was sent.","ty.sub":"LuHe Carpet Cleaning received your quote request. We'll get back to you shortly with a clear price for the work.","ty.callBtn":"Call (508) 736-8397","ty.text":"Text Us","ty.home":"Back to Home","ty.meta":"Shrewsbury, MA · Serving the MetroWest and Central MA","form.uploadBtn":"Upload photo","form.noPhoto":"No photo selected"},"pt":{"top.rating":"Avaliação 5.0 no Google","top.serving":"Atendendo Shrewsbury, Worcester e Central MA","menu.services":"Serviços","menu.results":"Resultados","menu.process":"Como Funciona","menu.reviews":"Avaliações","menu.faq":"Perguntas","header.callBtn":"Ligar","hero.badge":"★ Avaliação 5.0 no Google · Shrewsbury, MA","hero.h1":"Limpeza de Carpetes e Estofados em Shrewsbury, Worcester e Central MA","hero.lede":"A LuHe Carpet Cleaning devolve a vida aos seus carpetes, sofás, colchões, tapetes e cadeiras com uma limpeza profunda e cuidadosa em Shrewsbury, Worcester, MetroWest e Central Massachusetts. Resultado de verdade, preço justo, sem surpresas.","cta.callToday":"Ligue Agora","cta.textUs":"Mande SMS","cta.freeQuote":"Orçamento Grátis","cta.freeQuoteBig":"Peça seu Orçamento","cta.seeMore":"Ver Mais Resultados","trust.fiveStar":"Atendimento 5 Estrelas","trust.affordable":"Preço Justo","trust.proof":"Antes e Depois Real","trust.local":"Negócio Familiar Local","form.title":"Peça seu Orçamento Grátis","form.subtitle":"Envie seus dados e respondemos com um preço claro.","form.name":"Nome","form.namePh":"Seu nome completo","form.phone":"Telefone","form.email":"E-mail","form.optional":"(opcional)","form.service":"Serviço","form.selectService":"Selecione um serviço","form.message":"O que precisa de limpeza?","form.messagePh":"Conte sobre os cômodos, tecido, manchas, tamanho do sofá, etc.","form.photo":"Foto","form.photoHelp":"Envie uma foto, se puder. Isso nos ajuda a passar uma cotação mais rápida e precisa.","form.submit":"Enviar Pedido","form.privacy":"Sem spam. Seus dados vão direto para a LuHe Carpet Cleaning.","svc.carpet":"Limpeza de Carpete","svc.sofa":"Limpeza de Sofá / Estofado","svc.mattress":"Limpeza de Colchão","svc.rug":"Limpeza de Tapete","svc.chair":"Limpeza de Cadeira","svc.multiple":"Vários / Não sei","ey.services":"Serviços","ey.why":"Por que escolhem a LuHe","ey.results":"Resultados Reais","ey.whyShort":"Por que LuHe","ey.process":"Como funciona","ey.reviews":"Avaliações","ey.answers":"Respostas","services.title":"O Que Limpamos","services.intro":"Limpeza profissional e focada para as superfícies que sua família usa todos os dias.","svcCard.carpet.t":"Limpeza de Carpete","svcCard.carpet.d":"Limpeza profunda para carpetes de cômodos, escadas, cantos e manchas difíceis em Shrewsbury, MetroWest e Central MA.","svcCard.sofa.t":"Limpeza de Sofá e Estofado","svcCard.sofa.d":"Sofás, sectionals, poltronas, braços e almofadas — tecido renovado, com cara e sensação de novo.","svcCard.mattress.t":"Limpeza de Colchão","svcCard.mattress.d":"Removemos poeira e manchas do seu colchão para um lugar mais limpo e saudável para dormir.","svcCard.rug.t":"Limpeza de Tapete","svcCard.rug.d":"Tapetes decorativos, passadeiras e tapetes de uso intenso, limpos com segurança e sem danificar as fibras.","svcCard.chair.t":"Limpeza de Cadeira","svcCard.chair.d":"Cadeiras de jantar, poltronas, cadeiras de escritório e gamer — limpas onde você senta todo dia.","proof.title":"Resultados Reais, Não Fotos de Banco de Imagens","proof.intro":"Cada foto desta página é de um trabalho real em casas de Shrewsbury, MetroWest e Central MA. O que você vê é o que pode esperar.","proofFt.proof.t":"Antes e depois visível","proofFt.proof.d":"Você avalia o trabalho antes de pagar.","proofFt.local.t":"Atendimento local em MetroWest","proofFt.local.d":"Sediados em Shrewsbury, MA. Conhecemos os bairros que atendemos.","proofFt.simple.t":"Fácil de agendar","proofFt.simple.d":"Ligue, mande SMS ou preencha o formulário — só isso.","gallery.title":"Antes e Depois","gallery.intro":"Fotos reais de trabalhos da LuHe Carpet Cleaning — sofás, cadeiras, escadas, tapetes e carpetes.","gal1.t":"Canto de Sofá","gal1.d":"Limpeza de estofado em canto de uso intenso.","gal2.t":"Poltrona Cinza","gal2.d":"Remoção de manchas e renovação em poltrona de tecido.","gal3.t":"Sofá Escuro","gal3.d":"Limpeza profunda para sofá de estofado mais escuro.","gal4.t":"Sectional Bege","gal4.d":"Sectional da sala de estar de volta à vida.","gal5.t":"Cadeira Amarela","gal5.d":"Renovação de cor em cadeira de tecido.","gal6.t":"Carpete de Escada com Padrão","gal6.d":"Limpeza detalhada, padrão restaurado.","gal7.t":"Carpete de Escada Completo","gal7.d":"Limpeza completa do passadeira da escada.","gal8.t":"Sofá Claro","gal8.d":"Remoção de manchas em sofá de tecido claro.","gal9.t":"Detalhe da Escada","gal9.d":"Close de cantos e bordas da escada.","gal10.t":"Remoção de Mancha em Carpete","gal10.d":"Tratamento direcionado em carpete residencial.","gal11.t":"Detalhe do Braço","gal11.d":"Limpeza detalhada de braços de muito contato.","gal12.t":"Cadeira Gamer","gal12.d":"Renovação de estofado em cadeira de escritório/gamer.","gal13.t":"Carpete de Cômodo","gal13.d":"Limpeza profunda do carpete de toda a sala.","gal14.t":"Estofado Preto","gal14.d":"Limpeza para estofados e tecidos mais escuros.","gal15.t":"Borda do Carpete","gal15.d":"Bordas e cantos junto a paredes e móveis.","gal16.t":"Limpeza de Pufe","gal16.d":"Limpeza de pufe e apoio de pés em tecido.","gal17.t":"Sofá Claro Renovado","gal17.d":"Mais um resultado de sofá de tecido claro.","why.title":"Um Profissional Local em Quem Você Pode Confiar","why.intro":"Atendimento direto, preço justo e o cuidado que você daria à sua própria casa.","whyIt.stars.t":"Avaliações 5 Estrelas","whyIt.stars.d":"Avaliação 5.0 no Google de clientes reais em Shrewsbury, MetroWest e Central MA.","whyIt.proof.t":"Antes e Depois Real","whyIt.proof.d":"Você vê exatamente o que entregamos em outras casas — sem foto de banco, sem promessa exagerada.","whyIt.local.t":"Local em MetroWest","whyIt.local.d":"Conhecemos a região. Agendamento rápido, cuidado com a sua casa, fácil de conversar.","whyIt.afford.t":"Preço Justo","whyIt.afford.d":"Orçamento claro antes de começar. Sem empurrar serviço, sem taxa escondida.","process.title":"3 Passos Simples","process.intro":"Da primeira mensagem ao carpete ou sofá limpo — sem ficar de um lado pro outro.","step1.t":"Conte o que você precisa","step1.d":"Ligue ou mande SMS, ou preencha o formulário rápido. Algumas fotos ajudam a fechar o orçamento mais rápido.","step2.t":"Receba um orçamento claro","step2.d":"Você recebe um preço honesto e justo antes de qualquer trabalho começar. Sem cobrança surpresa.","step3.t":"Limpamos. Você aproveita.","step3.d":"Levamos nosso equipamento, tratamos o carpete ou estofado no local e deixamos pronto para uso.","reviews.from":"Avaliações Verificadas no Google","reviews.copy":"Clientes da LuHe Carpet Cleaning em Shrewsbury, MetroWest e Central MA dão consistentemente nota 5 de 5 ao nosso trabalho.","reviews.read":"Ler Avaliações no Google","reviews.leave":"Deixe sua Avaliação","faq.title":"Perguntas Frequentes","faq.intro":"Respostas rápidas antes de você agendar a limpeza.","faq1.q":"Quais regiões a LuHe Carpet Cleaning atende?","faq1.a":"Estamos sediados em Shrewsbury, MA e atendemos Worcester, Northborough, Westborough, Marlborough, Natick, Bellingham, e toda a área de MetroWest e Central Massachusetts. Se não tiver certeza se atendemos sua cidade, mande uma mensagem que confirmamos.","faq2.q":"Quais serviços vocês oferecem?","faq2.a":"Limpamos carpetes, sofás e estofados, colchões, tapetes e cadeiras. No momento não fazemos limpeza de azulejo/rejunte nem remoção de odor de pet.","faq3.q":"Como peço um orçamento grátis?","faq4.q":"Quanto custa a limpeza de carpete ou sofá?","faq4.a":"O preço depende do tamanho da área e do estado do tecido. A forma mais rápida de receber um preço claro é enviar algumas fotos junto com seu pedido — respondemos com a cotação antes de qualquer trabalho.","faq5.q":"Vocês trazem todo o equipamento?","faq5.a":"Sim. Chegamos com o equipamento e os produtos certos para o serviço, tratamos o carpete ou estofado no local, e deixamos pronto para você usar.","faq6.q":"Onde posso ver mais resultados de antes e depois?","finalCta.title":"Pronto para deixar seu carpete ou sofá novo?","finalCta.sub":"Orçamento grátis em minutos. Ligue, mande mensagem ou preencha o formulário.","foot.tagline":"Limpeza de carpete, sofá e estofado em Shrewsbury, Worcester e Central MA. 5.0 ★ Avaliação no Google.","foot.contact":"Contato","foot.area":"Área Atendida","foot.services":"Serviços","foot.sofa":"Sofá e Estofado","foot.rights":"Todos os direitos reservados.","mb.call":"Ligar","mb.text":"SMS","ty.h1":"Obrigado — recebemos sua solicitação.","ty.sub":"A LuHe Carpet Cleaning recebeu seu pedido de orçamento. Em breve retornamos com um preço claro para o trabalho.","ty.callBtn":"Ligar (508) 736-8397","ty.text":"Mande SMS","ty.home":"Voltar ao Início","ty.meta":"Shrewsbury, MA · Atendendo MetroWest e Central MA","form.uploadBtn":"Enviar foto","form.noPhoto":"Nenhuma foto selecionada"},"es":{"top.rating":"Calificación 5.0 en Google","top.serving":"Sirviendo Shrewsbury, Worcester y Central MA","menu.services":"Servicios","menu.results":"Resultados","menu.process":"Proceso","menu.reviews":"Reseñas","menu.faq":"Preguntas","header.callBtn":"Llamar","hero.badge":"★ Calificación 5.0 en Google · Shrewsbury, MA","hero.h1":"Limpieza de Alfombras y Tapicería en Shrewsbury, Worcester y Central MA","hero.lede":"LuHe Carpet Cleaning devuelve la vida a tus alfombras, sofás, colchones, tapetes y sillas con una limpieza profunda y cuidadosa en Shrewsbury, Worcester, MetroWest y Central Massachusetts. Resultados reales, precios justos, sin sorpresas.","cta.callToday":"Llámanos Hoy","cta.textUs":"Envíanos un SMS","cta.freeQuote":"Cotización Gratis","cta.freeQuoteBig":"Recibe tu Cotización","cta.seeMore":"Ver Más Resultados","trust.fiveStar":"Servicio 5 Estrellas","trust.affordable":"Precios Justos","trust.proof":"Antes y Después Real","trust.local":"Negocio Familiar Local","form.title":"Recibe tu Cotización Gratis","form.subtitle":"Envía tus datos y te responderemos con un precio claro.","form.name":"Nombre","form.namePh":"Tu nombre completo","form.phone":"Teléfono","form.email":"Correo","form.optional":"(opcional)","form.service":"Servicio","form.selectService":"Selecciona un servicio","form.message":"¿Qué necesita limpieza?","form.messagePh":"Cuéntanos sobre las habitaciones, tela, manchas, tamaño del sofá, etc.","form.photo":"Foto","form.photoHelp":"Sube una foto si puedes. Esto nos ayuda a darte una cotización más rápida y precisa.","form.submit":"Enviar Solicitud","form.privacy":"Sin spam. Tus datos van directo a LuHe Carpet Cleaning.","svc.carpet":"Limpieza de Alfombra","svc.sofa":"Limpieza de Sofá / Tapicería","svc.mattress":"Limpieza de Colchón","svc.rug":"Limpieza de Tapete","svc.chair":"Limpieza de Silla","svc.multiple":"Varios / No estoy seguro","ey.services":"Servicios","ey.why":"Por qué eligen a LuHe","ey.results":"Resultados Reales","ey.whyShort":"Por qué LuHe","ey.process":"Cómo funciona","ey.reviews":"Reseñas","ey.answers":"Respuestas","services.title":"Qué Limpiamos","services.intro":"Limpieza profesional y enfocada para las superficies que tu familia usa todos los días.","svcCard.carpet.t":"Limpieza de Alfombra","svcCard.carpet.d":"Limpieza profunda para alfombras de habitación, escaleras, bordes y manchas difíciles en Shrewsbury, MetroWest y Central MA.","svcCard.sofa.t":"Limpieza de Sofá y Tapicería","svcCard.sofa.d":"Sofás, seccionales, sillones, brazos y cojines — la tela vuelve a verse y sentirse fresca.","svcCard.mattress.t":"Limpieza de Colchón","svcCard.mattress.d":"Eliminamos polvo y manchas de tu colchón para un lugar más limpio y saludable para dormir.","svcCard.rug.t":"Limpieza de Tapete","svcCard.rug.d":"Tapetes decorativos, alfombras de paso y de tráfico alto, limpios sin dañar las fibras.","svcCard.chair.t":"Limpieza de Silla","svcCard.chair.d":"Sillas de comedor, sillones, sillas de oficina y gamer — limpias donde te sientas todos los días.","proof.title":"Resultados Reales, No Fotos de Stock","proof.intro":"Cada foto en esta página es de nuestro propio trabajo en casas reales de Shrewsbury, MetroWest y Central MA. Lo que ves es lo que puedes esperar.","proofFt.proof.t":"Antes y después visible","proofFt.proof.d":"Puedes evaluar el trabajo antes de pagar.","proofFt.local.t":"Servicio local en MetroWest","proofFt.local.d":"Con base en Shrewsbury, MA. Conocemos los vecindarios que servimos.","proofFt.simple.t":"Fácil de agendar","proofFt.simple.d":"Llama, envía SMS o llena el formulario — eso es todo.","gallery.title":"Antes y Después","gallery.intro":"Fotos reales de trabajos reales de LuHe Carpet Cleaning — sofás, sillas, escaleras, tapetes y alfombras.","gal1.t":"Esquina de Sofá","gal1.d":"Limpieza de tapicería en esquina de uso frecuente.","gal2.t":"Sillón Gris","gal2.d":"Eliminación de manchas y refresco en sillón de tela.","gal3.t":"Sofá Oscuro","gal3.d":"Limpieza profunda para sofá de tapicería más oscura.","gal4.t":"Seccional Beige","gal4.d":"Seccional de la sala de vuelta a la vida.","gal5.t":"Silla Amarilla","gal5.d":"Refresco claro de color en silla de acento de tela.","gal6.t":"Alfombra de Escalera con Patrón","gal6.d":"Limpieza detallada, patrón restaurado.","gal7.t":"Alfombra de Escalera Completa","gal7.d":"Limpieza completa del corredor de escalera.","gal8.t":"Sofá Claro","gal8.d":"Eliminación de manchas y refresco en sofá de tela clara.","gal9.t":"Detalle de Escalera","gal9.d":"Acercamiento a bordes y esquinas de la escalera.","gal10.t":"Eliminación de Manchas en Alfombra","gal10.d":"Tratamiento dirigido en alfombra residencial.","gal11.t":"Detalle de Brazo","gal11.d":"Limpieza detallada de brazos de mucho contacto.","gal12.t":"Silla Gamer","gal12.d":"Refresco de tapicería en silla de oficina/gamer.","gal13.t":"Alfombra de Habitación","gal13.d":"Limpieza profunda completa para salas de estar.","gal14.t":"Tapicería Negra","gal14.d":"Limpieza para tapicería y telas más oscuras.","gal15.t":"Borde de Alfombra","gal15.d":"Bordes y esquinas contra paredes y muebles.","gal16.t":"Limpieza de Otomana","gal16.d":"Limpieza de otomana y reposapiés de tela.","gal17.t":"Sofá Claro Renovado","gal17.d":"Otro resultado de sofá de tela clara.","why.title":"Un Profesional Local de Confianza","why.intro":"Servicio directo, precios justos y la atención al detalle que le darías a tu propia casa.","whyIt.stars.t":"Reseñas 5 Estrellas","whyIt.stars.d":"Calificación 5.0 en Google de clientes reales en Shrewsbury, MetroWest y Central MA.","whyIt.proof.t":"Antes y Después Real","whyIt.proof.d":"Ves exactamente lo que entregamos en otras casas — sin imágenes de stock, sin exageraciones.","whyIt.local.t":"Local en MetroWest","whyIt.local.d":"Conocemos la zona. Rápido para agendar, cuidadoso con tu casa, fácil para conversar.","whyIt.afford.t":"Precios Justos","whyIt.afford.d":"Cotizaciones claras desde el principio. Sin ventas forzadas, sin cargos ocultos.","process.title":"3 Pasos Simples","process.intro":"Del primer mensaje al sofá o alfombra limpia — sin ir y venir.","step1.t":"Cuéntanos qué necesitas","step1.d":"Llámanos o envía SMS, o llena el formulario rápido. Unas fotos ayudan a cotizar más rápido.","step2.t":"Recibe una cotización clara","step2.d":"Recibes un precio honesto y justo antes de empezar. Sin cargos sorpresa.","step3.t":"Limpiamos. Tú disfrutas.","step3.d":"Llevamos nuestro equipo, tratamos la alfombra o tapicería en el sitio y la dejamos lista para usar.","reviews.from":"Reseñas Verificadas en Google","reviews.copy":"Los clientes de LuHe Carpet Cleaning en Shrewsbury, MetroWest y Central MA califican consistentemente nuestro trabajo con 5 de 5.","reviews.read":"Leer Reseñas en Google","reviews.leave":"Deja una Reseña","faq.title":"Preguntas Frecuentes","faq.intro":"Respuestas rápidas antes de agendar tu limpieza.","faq1.q":"¿Qué áreas atiende LuHe Carpet Cleaning?","faq1.a":"Tenemos base en Shrewsbury, MA y servimos a Worcester, Northborough, Westborough, Marlborough, Natick, Bellingham, y toda el área de MetroWest y Central Massachusetts. Si no estás seguro de si servimos tu ciudad, envíanos un mensaje y te confirmamos.","faq2.q":"¿Qué servicios ofrecen?","faq2.a":"Limpiamos alfombras, sofás y tapicería, colchones, tapetes y sillas. Por ahora no ofrecemos limpieza de azulejo/lechada ni remoción de olor de mascotas.","faq3.q":"¿Cómo recibo una cotización gratis?","faq4.q":"¿Cuánto cuesta la limpieza de alfombra o sofá?","faq4.a":"El precio depende del tamaño del área y la condición de la tela. La forma más rápida de recibir un precio claro es enviar algunas fotos con tu solicitud — te cotizamos antes de empezar.","faq5.q":"¿Traen todo lo que necesitan?","faq5.a":"Sí. Llegamos con el equipo y los productos para el trabajo, tratamos la alfombra o tapicería en el sitio, y la dejamos lista para usar.","faq6.q":"¿Dónde puedo ver más resultados de antes y después?","finalCta.title":"¿Listo para renovar tu alfombra o sofá?","finalCta.sub":"Cotización gratis en minutos. Llama, envía mensaje o llena el formulario.","foot.tagline":"Limpieza de alfombra, sofá y tapicería en Shrewsbury, Worcester y Central MA. 5.0 ★ Calificación en Google.","foot.contact":"Contacto","foot.area":"Área de Servicio","foot.services":"Servicios","foot.sofa":"Sofá y Tapicería","foot.rights":"Todos los derechos reservados.","mb.call":"Llamar","mb.text":"SMS","ty.h1":"Gracias — recibimos tu solicitud.","ty.sub":"LuHe Carpet Cleaning recibió tu solicitud de cotización. En breve te responderemos con un precio claro para el trabajo.","ty.callBtn":"Llamar al (508) 736-8397","ty.text":"Envíanos un SMS","ty.home":"Volver al Inicio","ty.meta":"Shrewsbury, MA · Sirviendo MetroWest y Central MA","form.uploadBtn":"Subir foto","form.noPhoto":"Ninguna foto seleccionada"}};
   var currentLang='en';
+
+  var NEW_KEYS = {
+    "en": {
+      "validation.name": "Please enter your name.",
+      "validation.phone": "Please enter your phone number.",
+      "validation.phoneInvalid": "Please enter a valid 10-digit phone number.",
+      "validation.emailInvalid": "Please enter a valid email address.",
+      "validation.messageTooLong": "Message cannot exceed 1000 characters.",
+      "validation.photoTooLarge": "Photo size cannot exceed 5MB.",
+      "validation.submitError": "Failed to send request. Please try again or call us.",
+      "validation.sending": "Sending...",
+      "cookie.text": "We use cookies to optimize our website, analyze traffic, and support advertising. By clicking 'Accept All', you consent to our use of cookies.",
+      "cookie.accept": "Accept All",
+      "cookie.reject": "Reject",
+      "foot.privacy": "Privacy Policy",
+      "foot.contactPage": "Contact Page",
+      "menu.contact": "Contact",
+      "form.privacyConsent": "By submitting, you agree to our <a href=\"privacy-policy.html\" style=\"color:var(--blue);text-decoration:underline;\">Privacy Policy</a>."
+    },
+    "pt": {
+      "validation.name": "Por favor, insira seu nome.",
+      "validation.phone": "Por favor, insira seu número de telefone.",
+      "validation.phoneInvalid": "Por favor, insira um número de telefone válido com 10 dígitos.",
+      "validation.emailInvalid": "Por favor, insira um e-mail válido.",
+      "validation.messageTooLong": "A mensagem não pode exceder 1000 caracteres.",
+      "validation.photoTooLarge": "O tamanho da foto não pode exceder 5MB.",
+      "validation.submitError": "Falha ao enviar solicitação. Por favor tente novamente ou ligue.",
+      "validation.sending": "Enviando...",
+      "cookie.text": "Usamos cookies para otimizar nosso site, analisar o tráfego e apoiar publicidade. Ao clicar em 'Aceitar Todos', você consente com o uso de cookies.",
+      "cookie.accept": "Aceitar Todos",
+      "cookie.reject": "Rejeitar",
+      "foot.privacy": "Política de Privacidade",
+      "foot.contactPage": "Página de Contato",
+      "menu.contact": "Contato",
+      "form.privacyConsent": "Ao enviar, você concorda com nossa <a href=\"privacy-policy.html\" style=\"color:var(--blue);text-decoration:underline;\">Política de Privacidade</a>."
+    },
+    "es": {
+      "validation.name": "Por favor, introduce tu nombre.",
+      "validation.phone": "Por favor, introduce tu número de teléfono.",
+      "validation.phoneInvalid": "Por favor, introduce un número de teléfono válido de 10 dígitos.",
+      "validation.emailInvalid": "Por favor, introduce un correo electrónico válido.",
+      "validation.messageTooLong": "El mensaje no puede superar los 1000 caracteres.",
+      "validation.photoTooLarge": "El tamaño de la foto no puede superar los 5MB.",
+      "validation.submitError": "Error al enviar la solicitud. Por favor intenta de nuevo o llámanos.",
+      "validation.sending": "Enviando...",
+      "cookie.text": "Utilizamos cookies para optimizar nuestro sitio web, analizar el tráfico y respaldar la publicidad. Al hacer clic en 'Aceptar Todo', acepta nuestro uso de cookies.",
+      "cookie.accept": "Aceptar Todo",
+      "cookie.reject": "Rechazar",
+      "foot.privacy": "Política de Privacidad",
+      "foot.contactPage": "Página de Contato",
+      "menu.contact": "Contacto",
+      "form.privacyConsent": "Al enviar, aceptas nuestra <a href=\"privacy-policy.html\" style=\"color:var(--blue);text-decoration:underline;\">Política de Privacidad</a>."
+    }
+  };
+
+  for (var l in NEW_KEYS) {
+    if (TRANSLATIONS[l]) {
+      for (var k in NEW_KEYS[l]) {
+        TRANSLATIONS[l][k] = NEW_KEYS[l][k];
+      }
+    }
+  }
 
   function applyLang(lang){
     if(SUPPORTED.indexOf(lang)<0) lang='en';
@@ -760,34 +947,275 @@
     });
   }
 
-  // --- Custom form validation (English messages, novalidate on form) ---
-  var quoteForm=document.querySelector('form[name="quote"]');
-  if(quoteForm){
-    var nameF=quoteForm.querySelector('#f-name');
-    var phoneF=quoteForm.querySelector('#f-phone');
-    var serviceF=quoteForm.querySelector('#f-service');
-    function clearErr(field){
-      var w=field.closest('.field'); if(!w)return;
+  // --- Form Validation, AJAX Submission, and tracking ---
+  var quoteForm = document.getElementById('quoteForm');
+  if (quoteForm) {
+    var nameF = quoteForm.querySelector('#f-name');
+    var phoneF = quoteForm.querySelector('#f-phone');
+    var emailF = quoteForm.querySelector('#f-email');
+    var serviceF = quoteForm.querySelector('#f-service');
+    var messageF = quoteForm.querySelector('#f-msg');
+    var photoF = quoteForm.querySelector('#f-photo');
+    var btnSubmit = quoteForm.querySelector('#btnSubmit');
+    var errorBanner = document.getElementById('form-error-banner');
+
+    function getMsg(key) {
+      return (TRANSLATIONS[currentLang] && TRANSLATIONS[currentLang][key]) || TRANSLATIONS['en'][key] || key;
+    }
+
+    function clearErr(field) {
+      var w = field.closest('.field'); if (!w) return;
       w.classList.remove('has-error');
-      var msg=w.querySelector('.err-msg'); if(msg)msg.remove();
+      var msg = w.querySelector('.err-msg'); if (msg) msg.remove();
+      if (errorBanner) { errorBanner.style.display = 'none'; errorBanner.textContent = ''; }
     }
-    function setErr(field,text){
-      var w=field.closest('.field'); if(!w)return;
+
+    function setErr(field, text) {
+      var w = field.closest('.field'); if (!w) return;
       w.classList.add('has-error');
-      var msg=w.querySelector('.err-msg');
-      if(!msg){msg=document.createElement('div');msg.className='err-msg';w.appendChild(msg)}
-      msg.textContent=text;
+      var msg = w.querySelector('.err-msg');
+      if (!msg) {
+        msg = document.createElement('div');
+        msg.className = 'err-msg';
+        w.appendChild(msg);
+      }
+      msg.textContent = text;
     }
-    [nameF,phoneF,serviceF].forEach(function(f){if(f)f.addEventListener('input',function(){clearErr(f)});if(f&&f.tagName==='SELECT')f.addEventListener('change',function(){clearErr(f)})});
-    quoteForm.addEventListener('submit',function(e){
-      var ok=true,first=null;
-      if(nameF&&!nameF.value.trim()){setErr(nameF,'Please enter your name.');ok=false;first=first||nameF}
-      if(phoneF&&!phoneF.value.trim()){setErr(phoneF,'Please enter your phone number.');ok=false;first=first||phoneF}
-      if(serviceF&&!serviceF.value){setErr(serviceF,'Please select a service.');ok=false;first=first||serviceF}
-      if(!ok){e.preventDefault();if(first){first.focus();first.scrollIntoView({behavior:'smooth',block:'center'})}}
+
+    [nameF, phoneF, emailF, serviceF, messageF].forEach(function(f) {
+      if (f) {
+        f.addEventListener('input', function() { clearErr(f) });
+        if (f.tagName === 'SELECT') f.addEventListener('change', function() { clearErr(f) });
+      }
+    });
+
+    // Client-side image compression
+    function compressImageAndSubmit(formData, file) {
+      var reader = new FileReader();
+      reader.onload = function(e) {
+        var img = new Image();
+        img.onload = function() {
+          var canvas = document.createElement('canvas');
+          var ctx = canvas.getContext('2d');
+          var MAX_WIDTH = 1200;
+          var MAX_HEIGHT = 1200;
+          var width = img.width;
+          var height = img.height;
+          if (width > height) {
+            if (width > MAX_WIDTH) { height *= MAX_WIDTH / width; width = MAX_WIDTH; }
+          } else {
+            if (height > MAX_HEIGHT) { width *= MAX_HEIGHT / height; height = MAX_HEIGHT; }
+          }
+          canvas.width = width;
+          canvas.height = height;
+          ctx.drawImage(img, 0, 0, width, height);
+          var base64Content = canvas.toDataURL('image/jpeg', 0.8);
+          formData.photo = {
+            filename: file.name,
+            content: base64Content
+          };
+          sendFormRequest(formData);
+        };
+        img.src = e.target.result;
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function sendFormRequest(formData) {
+      fetch('/api/send-quote', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData)
+      })
+      .then(function(res) {
+        return res.json().then(function(data) {
+          if (!res.ok) throw new Error(data.error || 'Server error');
+          return data;
+        });
+      })
+      .then(function(data) {
+        // Track form_submit and lead_form_submitted before redirection
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+          'event': 'lead_form_submitted',
+          'event_name': 'form_submit',
+          'form_name': formData.formName,
+          'service': formData.service
+        });
+        // Redirect to thank-you page after successful submit
+        window.location.href = 'thank-you.html';
+      })
+      .catch(function(err) {
+        console.error('Submit error:', err);
+        if (btnSubmit) {
+          btnSubmit.disabled = false;
+          btnSubmit.innerHTML = getMsg('form.submit');
+        }
+        if (errorBanner) {
+          errorBanner.textContent = getMsg('validation.submitError');
+          errorBanner.style.display = 'block';
+          errorBanner.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+      });
+    }
+
+    quoteForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      var ok = true, first = null;
+
+      var nameVal = nameF ? nameF.value.trim() : '';
+      var phoneVal = phoneF ? phoneF.value.trim() : '';
+      var phoneDigits = phoneVal.replace(/\D/g, '');
+      var emailVal = emailF ? emailF.value.trim() : '';
+      var serviceVal = serviceF ? serviceF.value : '';
+      var messageVal = messageF ? messageF.value.trim() : '';
+
+      if (!nameVal) {
+        setErr(nameF, getMsg('validation.name')); ok = false; first = first || nameF;
+      }
+      if (!phoneVal) {
+        setErr(phoneF, getMsg('validation.phone')); ok = false; first = first || phoneF;
+      } else if (phoneDigits.length < 10) {
+        setErr(phoneF, getMsg('validation.phoneInvalid')); ok = false; first = first || phoneF;
+      }
+      var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (emailVal && !emailRegex.test(emailVal)) {
+        setErr(emailF, getMsg('validation.emailInvalid')); ok = false; first = first || emailF;
+      }
+      if (!serviceVal) {
+        setErr(serviceF, getMsg('validation.service')); ok = false; first = first || serviceF;
+      }
+      if (messageVal.length > 1000) {
+        setErr(messageF, getMsg('validation.messageTooLong')); ok = false; first = first || messageF;
+      }
+
+      var file = photoF && photoF.files && photoF.files[0];
+      if (file && file.size > 5 * 1024 * 1024) {
+        setErr(photoF, getMsg('validation.photoTooLarge')); ok = false; first = first || photoF;
+      }
+
+      if (!ok) {
+        if (first) {
+          first.focus();
+          first.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+        return;
+      }
+
+      // Validated successfully! Show loading state
+      if (btnSubmit) {
+        btnSubmit.disabled = true;
+        btnSubmit.textContent = getMsg('validation.sending');
+      }
+      if (errorBanner) {
+        errorBanner.style.display = 'none';
+        errorBanner.textContent = '';
+      }
+
+      var formData = {
+        name: nameVal,
+        phone: phoneVal,
+        email: emailVal,
+        service: serviceVal,
+        message: messageVal,
+        lang: currentLang,
+        formName: 'quote'
+      };
+
+      if (file) {
+        compressImageAndSubmit(formData, file);
+      } else {
+        sendFormRequest(formData);
+      }
+    });
+  }
+
+  // --- Conversion Tracking & Event Listeners ---
+  document.addEventListener('click', function(e) {
+    var link = e.target.closest('a');
+    if (link && link.href) {
+      var href = link.href.trim();
+      if (href.startsWith('tel:')) {
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+          'event': 'phone_click',
+          'click_value': href
+        });
+      } else if (href.startsWith('sms:')) {
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+          'event': 'sms_click',
+          'click_value': href
+        });
+      } else if (href.includes('wa.me') || href.includes('api.whatsapp.com')) {
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+          'event': 'whatsapp_click',
+          'click_value': href
+        });
+      } else if (href.startsWith('#quote') || (link.getAttribute('href') === '#quote')) {
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+          'event': 'quote_cta_click',
+          'cta_name': link.innerText || link.ariaLabel || 'Quote CTA'
+        });
+      }
+    }
+  });
+
+  // --- Cookie Consent Banner Logic ---
+  var banner = document.getElementById('cookie-consent-banner');
+  var btnAccept = document.getElementById('btn-accept-all');
+  var btnReject = document.getElementById('btn-reject-all');
+  
+  if (banner && localStorage.getItem('luhe_consent') === null) {
+    banner.style.display = 'block';
+  }
+  
+  if (btnAccept) {
+    btnAccept.addEventListener('click', function() {
+      var consentObj = {
+        'ad_storage': 'granted',
+        'analytics_storage': 'granted',
+        'ad_user_data': 'granted',
+        'ad_personalization': 'granted'
+      };
+      localStorage.setItem('luhe_consent', JSON.stringify(consentObj));
+      if (window.gtag) {
+        window.gtag('consent', 'update', consentObj);
+      }
+      if (banner) banner.style.display = 'none';
+    });
+  }
+  
+  if (btnReject) {
+    btnReject.addEventListener('click', function() {
+      var consentObj = {
+        'ad_storage': 'denied',
+        'analytics_storage': 'denied',
+        'ad_user_data': 'denied',
+        'ad_personalization': 'denied'
+      };
+      localStorage.setItem('luhe_consent', JSON.stringify(consentObj));
+      if (window.gtag) {
+        window.gtag('consent', 'update', consentObj);
+      }
+      if (banner) banner.style.display = 'none';
     });
   }
 })();
 </script>
+
+<!-- Cookie Consent Banner -->
+<div id="cookie-consent-banner" class="cookie-banner" style="display:none;">
+  <div class="cookie-banner-content">
+    <p><span data-i18n="cookie.text">We use cookies to optimize our website, analyze traffic, and support advertising. By clicking 'Accept All', you consent to our use of cookies.</span> <a href="privacy-policy.html" data-i18n="foot.privacy">Privacy Policy</a></p>
+    <div class="cookie-banner-buttons">
+      <button id="btn-accept-all" class="btn btn-primary btn-sm" data-i18n="cookie.accept">Accept All</button>
+      <button id="btn-reject-all" class="btn btn-ghost btn-sm" data-i18n="cookie.reject">Reject</button>
+    </div>
+  </div>
+</div>
+
 </body>
 </html>

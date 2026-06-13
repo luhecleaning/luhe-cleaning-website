@@ -1,6 +1,55 @@
 <!doctype html>
 <html lang="en">
 <head>
+<!-- SITE_CONFIG and Google Analytics / Consent Mode / GTM -->
+<script>
+  window.SITE_CONFIG = {
+    GTM_ID: 'GTM-XXXXXXX', // Replace with real Google Tag Manager ID
+    GA4_ID: 'G-XXXXXXXXXX', // Replace with real Google Analytics 4 ID
+    GOOGLE_ADS_ID: 'AW-XXXXXXXXXX', // Replace with real Google Ads ID
+    GOOGLE_ADS_FORM_CONVERSION_LABEL: 'AW-FORM-CONVERSION-LABEL',
+    GOOGLE_ADS_PHONE_CONVERSION_LABEL: 'AW-PHONE-CONVERSION-LABEL',
+    META_PIXEL_ID: 'PIXEL_ID_HERE'
+  };
+
+  // Google Consent Mode v2 Default Setup
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  
+  if (localStorage.getItem('luhe_consent') === null) {
+    gtag('consent', 'default', {
+      'ad_storage': 'denied',
+      'analytics_storage': 'denied',
+      'ad_user_data': 'denied',
+      'ad_personalization': 'denied',
+      'wait_for_update': 500
+    });
+  } else {
+    try {
+      var savedConsent = JSON.parse(localStorage.getItem('luhe_consent'));
+      gtag('consent', 'default', {
+        'ad_storage': savedConsent.ad_storage || 'denied',
+        'analytics_storage': savedConsent.analytics_storage || 'denied',
+        'ad_user_data': savedConsent.ad_user_data || 'denied',
+        'ad_personalization': savedConsent.ad_personalization || 'denied'
+      });
+    } catch(e) {
+      gtag('consent', 'default', {
+        'ad_storage': 'denied',
+        'analytics_storage': 'denied',
+        'ad_user_data': 'denied',
+        'ad_personalization': 'denied'
+      });
+    }
+  }
+</script>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer', window.SITE_CONFIG.GTM_ID);</script>
+<!-- End Google Tag Manager -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#0B6FB8">
@@ -33,6 +82,17 @@
 </script>
 </head>
 <body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-XXXXXXX"
+height="0" width="0" style="display:none;visibility:hidden" id="gtm-noscript"></iframe></noscript>
+<script>
+  var noscriptIframe = document.getElementById('gtm-noscript');
+  if (noscriptIframe && window.SITE_CONFIG && window.SITE_CONFIG.GTM_ID) {
+    noscriptIframe.src = 'https://www.googletagmanager.com/ns.html?id=' + window.SITE_CONFIG.GTM_ID;
+  }
+</script>
+<!-- End Google Tag Manager (noscript) -->
+
   <main class="card" role="main">
     <div class="check" aria-hidden="true">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg>
@@ -52,13 +112,15 @@
     </div>
     <p class="meta">
       <a href="mailto:luhecleaning@gmail.com">luhecleaning@gmail.com</a><br>
-      <span data-i18n="ty.meta">Shrewsbury, MA · Serving the MetroWest and Central MA</span>
+      <span data-i18n="ty.meta">Shrewsbury, MA · Serving the MetroWest and Central MA</span><br>
+      <a href="privacy-policy.html" data-i18n="foot.privacy" style="margin-right:12px; color:#0B6FB8; font-weight:600; text-decoration:none;">Privacy Policy</a>
+      <a href="contact.html" data-i18n="foot.contactPage" style="color:#0B6FB8; font-weight:600; text-decoration:none;">Contact Page</a>
     </p>
   </main>
 <script>
 (function(){
   var SUPPORTED=['en','pt','es'];
-  var T={"en":{"ty.h1":"Thanks — your request was sent.","ty.sub":"LuHe Carpet Cleaning received your quote request. We'll get back to you shortly with a clear price for the work.","ty.callBtn":"Call (508) 736-8397","ty.text":"Text Us","ty.home":"Back to Home","ty.meta":"Shrewsbury, MA · Serving the MetroWest and Central MA"},"pt":{"ty.h1":"Obrigado — recebemos sua solicitação.","ty.sub":"A LuHe Carpet Cleaning recebeu seu pedido de orçamento. Em breve retornamos com um preço claro para o trabalho.","ty.callBtn":"Ligar (508) 736-8397","ty.text":"Mande SMS","ty.home":"Voltar ao Início","ty.meta":"Shrewsbury, MA · Atendendo MetroWest e Central MA"},"es":{"ty.h1":"Gracias — recibimos tu solicitud.","ty.sub":"LuHe Carpet Cleaning recibió tu solicitud de cotización. En breve te responderemos con un precio claro para el trabajo.","ty.callBtn":"Llamar al (508) 736-8397","ty.text":"Envíanos un SMS","ty.home":"Volver al Inicio","ty.meta":"Shrewsbury, MA · Sirviendo MetroWest y Central MA"}};
+  var T={"en":{"ty.h1":"Thanks — your request was sent.","ty.sub":"LuHe Carpet Cleaning received your quote request. We'll get back to you shortly with a clear price for the work.","ty.callBtn":"Call (508) 736-8397","ty.text":"Text Us","ty.home":"Back to Home","ty.meta":"Shrewsbury, MA · Serving the MetroWest and Central MA","foot.privacy":"Privacy Policy","foot.contactPage":"Contact Page"},"pt":{"ty.h1":"Obrigado — recebemos sua solicitação.","ty.sub":"A LuHe Carpet Cleaning recebeu seu pedido de orçamento. Em breve retornamos com um preço claro para o trabalho.","ty.callBtn":"Ligar (508) 736-8397","ty.text":"Mande SMS","ty.home":"Voltar ao Início","ty.meta":"Shrewsbury, MA · Atendendo MetroWest e Central MA","foot.privacy":"Política de Privacidade","foot.contactPage":"Página de Contato"},"es":{"ty.h1":"Gracias — recibimos tu solicitud.","ty.sub":"LuHe Carpet Cleaning recibió tu solicitud de cotización. En breve te responderemos con un precio claro para el trabajo.","ty.callBtn":"Llamar al (508) 736-8397","ty.text":"Envíanos un SMS","ty.home":"Volver al Inicio","ty.meta":"Shrewsbury, MA · Sirviendo MetroWest y Central MA","foot.privacy":"Política de Privacidad","foot.contactPage":"Página de Contacto"}};
   var lang='en';
   try{
     var s=localStorage.getItem('luhe_lang');
@@ -68,6 +130,13 @@
   document.documentElement.lang=lang;
   var d=T[lang]; if(!d) return;
   document.querySelectorAll('[data-i18n]').forEach(function(el){var k=el.getAttribute('data-i18n');if(d[k]!=null)el.textContent=d[k]});
+
+  // Firing automated conversion tracking event
+  window.dataLayer = window.dataLayer || [];
+  window.dataLayer.push({
+    'event': 'lead_conversion',
+    'form_name': 'quote'
+  });
 })();
 </script>
 </body>

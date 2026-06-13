@@ -1,0 +1,668 @@
+<!doctype html>
+<html lang="en">
+<head>
+<!-- SITE_CONFIG and Google Analytics / Consent Mode / GTM -->
+<script>
+  window.SITE_CONFIG = {
+    GTM_ID: 'GTM-XXXXXXX', // Replace with real Google Tag Manager ID
+    GA4_ID: 'G-XXXXXXXXXX', // Replace with real Google Analytics 4 ID
+    GOOGLE_ADS_ID: 'AW-XXXXXXXXXX', // Replace with real Google Ads ID
+    GOOGLE_ADS_FORM_CONVERSION_LABEL: 'AW-FORM-CONVERSION-LABEL',
+    GOOGLE_ADS_PHONE_CONVERSION_LABEL: 'AW-PHONE-CONVERSION-LABEL',
+    META_PIXEL_ID: 'PIXEL_ID_HERE'
+  };
+
+  // Google Consent Mode v2 Default Setup
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  
+  if (localStorage.getItem('luhe_consent') === null) {
+    gtag('consent', 'default', {
+      'ad_storage': 'denied',
+      'analytics_storage': 'denied',
+      'ad_user_data': 'denied',
+      'ad_personalization': 'denied',
+      'wait_for_update': 500
+    });
+  } else {
+    try {
+      var savedConsent = JSON.parse(localStorage.getItem('luhe_consent'));
+      gtag('consent', 'default', {
+        'ad_storage': savedConsent.ad_storage || 'denied',
+        'analytics_storage': savedConsent.analytics_storage || 'denied',
+        'ad_user_data': savedConsent.ad_user_data || 'denied',
+        'ad_personalization': savedConsent.ad_personalization || 'denied'
+      });
+    } catch(e) {
+      gtag('consent', 'default', {
+        'ad_storage': 'denied',
+        'analytics_storage': 'denied',
+        'ad_user_data': 'denied',
+        'ad_personalization': 'denied'
+      });
+    }
+  }
+</script>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer', window.SITE_CONFIG.GTM_ID);</script>
+<!-- End Google Tag Manager -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0B6FB8">
+<meta name="format-detection" content="telephone=yes">
+<title data-i18n="pp.title">Privacy Policy — LuHe Carpet Cleaning</title>
+<meta name="description" content="Privacy Policy for LuHe Carpet Cleaning. Learn how we collect, use, and protect your information.">
+<link rel="canonical" href="https://luhecleaning.com/privacy-policy.html">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<style>
+  :root{
+    --blue:#0B6FB8;--dark:#063F6D;--ink:#0a1d33;--cyan:#0876A8;
+    --soft:#EAF6FF;--line:#D7E6F2;--muted:#506172;--ok:#16A34A;
+    --wa:#25D366;--shadow:0 14px 36px rgba(6,63,109,.14);
+    --shadow-sm:0 4px 14px rgba(6,63,109,.08);--radius:18px;
+  }
+  *,*::before,*::after{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+  body{margin:0;font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Helvetica,sans-serif;color:var(--ink);background:#fff;line-height:1.55;-webkit-font-smoothing:antialiased}
+  img,svg{display:block;max-width:100%;height:auto}
+  a{color:inherit;text-decoration:none}
+  button{font:inherit;cursor:pointer}
+  h1,h2,h3,h4{margin:0;line-height:1.2;color:var(--dark);letter-spacing:-.02em}
+  h1{font-size:clamp(28px,4.5vw,40px);font-weight:800;margin-bottom:16px}
+  h2{font-size:clamp(20px,3vw,26px);font-weight:700;margin-top:32px;margin-bottom:12px}
+  h3{font-size:18px;font-weight:700;margin-top:20px;margin-bottom:8px}
+  p{margin:0 0 16px}
+  ul{margin:0 0 16px;padding-left:22px}
+  li{margin-bottom:6px}
+  
+  /* topbar */
+  .topbar{background:var(--dark);color:#dceaf6;font-size:13.5px;padding:7px 18px}
+  .topbar .row{max-width:1180px;margin:0 auto;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px 24px}
+  .topbar a{color:#fff;font-weight:600}
+  .topbar .star{color:#FFC542}
+  /* header */
+  .site-header{position:sticky;top:0;background:#fff;border-bottom:1px solid var(--line);z-index:50}
+  .nav{max-width:1180px;margin:0 auto;padding:12px 18px;display:flex;align-items:center;gap:18px;justify-content:space-between}
+  .brand{display:flex;align-items:center;gap:10px}
+  .brand img{width:140px;height:auto;display:block}
+  .menu{display:flex;gap:26px;font-weight:600;font-size:15px;color:#1d3a55}
+  .menu a:hover{color:var(--blue)}
+  .menu a.active{color:var(--blue)}
+  .nav-actions{display:flex;align-items:center;gap:10px}
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border-radius:999px;font-weight:700;border:0;padding:13px 22px;font-size:15px;line-height:1;transition:transform .12s ease,background .15s ease;text-align:center;white-space:nowrap}
+  .btn:active{transform:translateY(1px)}
+  .btn-cta{background:var(--cyan);color:#fff;box-shadow:0 10px 24px rgba(8,118,168,.3)}
+  .btn-cta:hover{background:#066388}
+  .menu-toggle{display:none;background:#fff;border:1.5px solid var(--line);padding:9px;border-radius:10px}
+  .menu-toggle svg{width:22px;height:22px;color:var(--dark)}
+  
+  /* doc layout */
+  .doc-section{padding:54px 18px}
+  .wrap{max-width:840px;margin:0 auto}
+  
+  /* footer */
+  footer{background:#052f50;color:#cfe2f3;padding:44px 18px 28px;font-size:14.5px}
+  .footer-grid{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:30px}
+  footer h3{color:#fff;font-size:15px;margin-bottom:12px;text-transform:uppercase;letter-spacing:.06em}
+  footer a{display:block;color:#cfe2f3;margin:5px 0;line-height:1.5}
+  footer a:hover{color:#fff}
+  .foot-brand img{background:#fff;padding:10px 14px;border-radius:12px;width:240px;display:block;margin-bottom:14px}
+  .foot-brand p{margin-bottom:8px;color:#aac8e2}
+  .social{display:flex;gap:8px;margin-top:8px}
+  .social a{display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;background:rgba(255,255,255,.08);border-radius:999px;margin:0;border:1px solid rgba(255,255,255,.14)}
+  .social a:hover{background:rgba(255,255,255,.16)}
+  .social svg{width:18px;height:18px}
+  .copyright{max-width:1180px;margin:26px auto 0;border-top:1px solid rgba(255,255,255,.14);padding-top:18px;font-size:13px;color:#9bbcd6;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+  
+  /* lang switcher */
+  .lang-switcher{display:inline-flex;gap:4px;align-items:center;margin-left:auto}
+  .lang-btn{background:transparent;border:1px solid rgba(255,255,255,.25);color:#fff;cursor:pointer;padding:4px 8px;border-radius:8px;font-size:13px;font-weight:600;line-height:1;transition:background .12s ease,border-color .12s ease;display:inline-flex;align-items:center;gap:4px;font-family:inherit}
+  .lang-btn:hover{background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.5)}
+  .lang-btn.active{background:#fff;color:var(--dark);border-color:#fff}
+  .lang-btn .flag{display:inline-block;border-radius:1px;flex:none}
+  
+  /* whatsapp float */
+  .wa-float{position:fixed;right:18px;bottom:18px;width:58px;height:58px;border-radius:50%;background:var(--wa);color:#fff;display:inline-flex;align-items:center;justify-content:center;z-index:60;box-shadow:0 14px 30px rgba(0,0,0,.22),0 0 0 4px rgba(37,211,102,.18);transition:transform .15s ease}
+  .wa-float:hover{transform:scale(1.06)}
+  .wa-float svg{width:32px;height:32px}
+  
+  /* mobile sticky bar */
+  .mobile-bar{display:none}
+
+  /* Cookie Consent Banner Styling */
+  .cookie-banner {
+    position: fixed;
+    bottom: 24px;
+    left: 24px;
+    right: 24px;
+    max-width: 600px;
+    background: #fff;
+    border: 1px solid var(--line);
+    box-shadow: var(--shadow);
+    border-radius: 16px;
+    padding: 20px;
+    z-index: 9999;
+    font-family: inherit;
+  }
+  .cookie-banner-content {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .cookie-banner-content p {
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.55;
+    margin: 0;
+  }
+  .cookie-banner-content p a {
+    color: var(--blue);
+    text-decoration: underline;
+  }
+  .cookie-banner-buttons {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+  }
+  .btn-sm {
+    padding: 10px 18px;
+    font-size: 14px;
+  }
+
+  @media (max-width:1024px){
+    .menu{display:none}
+    .menu.open{display:flex;flex-direction:column;position:absolute;top:100%;left:0;right:0;background:#fff;padding:18px;border-bottom:1px solid var(--line);box-shadow:0 12px 30px rgba(0,0,0,.07);gap:14px}
+    .menu-toggle{display:inline-flex}
+    .nav{position:relative}
+    .footer-grid{grid-template-columns:1.4fr 1fr 1fr;gap:24px}
+    .foot-brand{grid-column:1/-1}
+  }
+  @media (max-width:640px){
+    .doc-section{padding:36px 18px}
+    body{padding-bottom:64px}
+    .topbar .meta-wide{display:none}
+    .footer-grid{grid-template-columns:1fr 1fr}
+    .foot-brand{grid-column:1/-1}
+    .nav-actions .btn-call-text{display:none}
+    .nav-actions .btn{padding:11px 14px}
+    .brand img{width:118px}
+    .wa-float{display:none}
+    .mobile-bar{display:flex;position:fixed;left:0;right:0;bottom:0;background:#fff;border-top:1px solid var(--line);padding:8px;gap:8px;z-index:60;box-shadow:0 -8px 24px rgba(0,0,0,.08)}
+    .mobile-bar a{flex:1;padding:13px 8px;border-radius:12px;font-weight:700;font-size:14.5px;display:inline-flex;align-items:center;justify-content:center;gap:6px}
+    .mobile-bar .b-call{background:var(--blue);color:#fff}
+    .mobile-bar .b-wa{background:#0F7568;color:#fff}
+    .mobile-bar svg{width:18px;height:18px}
+    .copyright{justify-content:center;text-align:center}
+    .cookie-banner {
+      bottom: 74px; /* Above mobile sticky call bar */
+      left: 12px;
+      right: 12px;
+      padding: 16px;
+    }
+    .cookie-banner-buttons {
+      width: 100%;
+    }
+    .cookie-banner-buttons button {
+      flex: 1;
+    }
+  }
+</style>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-XXXXXXX"
+height="0" width="0" style="display:none;visibility:hidden" id="gtm-noscript"></iframe></noscript>
+<script>
+  var noscriptIframe = document.getElementById('gtm-noscript');
+  if (noscriptIframe && window.SITE_CONFIG && window.SITE_CONFIG.GTM_ID) {
+    noscriptIframe.src = 'https://www.googletagmanager.com/ns.html?id=' + window.SITE_CONFIG.GTM_ID;
+  }
+</script>
+<!-- End Google Tag Manager (noscript) -->
+
+<!-- Topbar -->
+<div class="topbar" role="region" aria-label="Top info">
+  <div class="row">
+    <span><span class="star" aria-hidden="true">★</span> 5.0 Google Rating</span>
+    <span class="meta-wide" data-i18n="top.serving">Serving Shrewsbury, Worcester &amp; Central MA</span>
+    <span class="lang-switcher" role="group" aria-label="Language">
+      <button type="button" class="lang-btn" data-lang="en" aria-label="English"><svg class="flag" viewBox="0 0 19 10" width="16" height="11" aria-hidden="true"><rect width="19" height="10" fill="#fff"/><g fill="#B22234"><rect width="19" height=".77"/><rect width="19" height=".77" y="1.54"/><rect width="19" height=".77" y="3.08"/><rect width="19" height=".77" y="4.62"/><rect width="19" height=".77" y="6.15"/><rect width="19" height=".77" y="7.69"/><rect width="19" height=".77" y="9.23"/></g><rect width="7.6" height="5.38" fill="#3C3B6E"/></svg><span class="lang-code">EN</span></button>
+      <button type="button" class="lang-btn" data-lang="pt" aria-label="Português"><svg class="flag" viewBox="0 0 14 10" width="16" height="11" aria-hidden="true"><rect width="14" height="10" fill="#009C3B"/><polygon points="7,1 13,5 7,9 1,5" fill="#FFDF00"/><circle cx="7" cy="5" r="1.8" fill="#002776"/></svg><span class="lang-code">PT</span></button>
+      <button type="button" class="lang-btn" data-lang="es" aria-label="Español"><svg class="flag" viewBox="0 0 14 10" width="16" height="11" aria-hidden="true"><rect width="14" height="10" fill="#AA151B"/><rect y="2.5" width="14" height="5" fill="#F1BF00"/></svg><span class="lang-code">ES</span></button>
+    </span>
+    <a href="tel:+15087368397" aria-label="Call LuHe Carpet Cleaning at 508-736-8397">📞 (508) 736-8397</a>
+  </div>
+</div>
+
+<!-- Header -->
+<header class="site-header">
+  <nav class="nav" aria-label="Primary">
+    <a href="index.html" class="brand" aria-label="LuHe Carpet Cleaning home">
+      <picture>
+        <source type="image/webp" srcset="assets/logo.webp">
+        <img src="assets/logo.png" alt="LuHe Carpet Cleaning logo" width="600" height="532" loading="eager" decoding="async">
+      </picture>
+    </a>
+    <div class="menu" id="menu">
+      <a href="index.html#services" data-i18n="menu.services">Services</a>
+      <a href="index.html#results" data-i18n="menu.results">Results</a>
+      <a href="index.html#process" data-i18n="menu.process">Process</a>
+      <a href="index.html#reviews" data-i18n="menu.reviews">Reviews</a>
+      <a href="index.html#faq" data-i18n="menu.faq">FAQ</a>
+      <a href="contact.html" data-i18n="menu.contact">Contact</a>
+    </div>
+    <div class="nav-actions">
+      <button class="menu-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="menu" id="navToggle">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg>
+      </button>
+      <a class="btn btn-cta" href="tel:+15087368397" aria-label="Call (508) 736-8397">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19.23 15.26l-2.54-.29a1.5 1.5 0 0 0-1.31.43l-1.84 1.84a14.4 14.4 0 0 1-6.59-6.59l1.85-1.85a1.5 1.5 0 0 0 .43-1.31L8.94 4.96A1.5 1.5 0 0 0 7.45 3.7H5.07A1.5 1.5 0 0 0 3.59 5.3 16.31 16.31 0 0 0 18.7 20.41a1.5 1.5 0 0 0 1.6-1.49v-2.36a1.5 1.5 0 0 0-1.27-1.3z"/></svg>
+        <span class="btn-call-text"><span data-i18n="header.callBtn">Call</span> (508) 736-8397</span>
+      </a>
+    </div>
+  </nav>
+</header>
+
+<main class="doc-section">
+  <div class="wrap" id="privacy-content">
+    <!-- Content injected via JavaScript translation engine -->
+  </div>
+</main>
+
+<!-- Footer -->
+<footer>
+  <div class="footer-grid">
+    <div class="foot-brand">
+      <picture>
+        <source type="image/webp" srcset="assets/logo.webp">
+        <img src="assets/logo.png" alt="LuHe Carpet Cleaning logo" width="600" height="532" loading="lazy" decoding="async">
+      </picture>
+      <p data-i18n="foot.tagline">Carpet, sofa and upholstery cleaning in Shrewsbury, Worcester &amp; Central MA. 5.0 ★ Google Rating.</p>
+      <div class="social">
+        <a href="https://www.instagram.com/luhecarpetcleaning/" target="_blank" rel="noopener" aria-label="LuHe Carpet Cleaning on Instagram">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.2c3.2 0 3.6 0 4.8.1a6.5 6.5 0 0 1 2.2.4 4.5 4.5 0 0 1 2.6 2.6 6.5 6.5 0 0 1 .4 2.2c.1 1.2.1 1.6.1 4.8s0 3.6-.1 4.8a6.5 6.5 0 0 1-.4 2.2 4.5 4.5 0 0 1-2.6 2.6 6.5 6.5 0 0 1-2.2.4c-1.2.1-1.6.1-4.8.1s-3.6 0-4.8-.1a6.5 6.5 0 0 1-2.2-.4 4.5 4.5 0 0 1-2.6-2.6 6.5 6.5 0 0 1-.4-2.2C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.8a6.5 6.5 0 0 1 .4-2.2 4.5 4.5 0 0 1 2.6-2.6 6.5 6.5 0 0 1 2.2-.4C8.4 2.2 8.8 2.2 12 2.2zm0 1.8c-3.1 0-3.5 0-4.7.1a4.7 4.7 0 0 0-1.6.3 2.6 2.6 0 0 0-1.5 1.5 4.7 4.7 0 0 0-.3 1.6C3.8 8.5 3.8 8.9 3.8 12s0 3.5.1 4.7a4.7 4.7 0 0 0 .3 1.6 2.6 2.6 0 0 0 1.5 1.5 4.7 4.7 0 0 0 1.6.3c1.2.1 1.6.1 4.7.1s3.5 0 4.7-.1a4.7 4.7 0 0 0 1.6-.3 2.6 2.6 0 0 0 1.5-1.5 4.7 4.7 0 0 0 .3-1.6c.1-1.2.1-1.6.1-4.7s0-3.5-.1-4.7a4.7 4.7 0 0 0-.3-1.6 2.6 2.6 0 0 0-1.5-1.5 4.7 4.7 0 0 0-1.6-.3C15.5 4 15.1 4 12 4zm0 3a5 5 0 1 1 0 10 5 5 0 0 1 0-10zm0 1.8a3.2 3.2 0 1 0 0 6.4 3.2 3.2 0 0 0 0-6.4zm5.2-2a1.2 1.2 0 1 1 0 2.4 1.2 1.2 0 0 1 0-2.4z"/></svg>
+        </a>
+        <a href="https://www.facebook.com/profile.php?id=61586350434713" target="_blank" rel="noopener" aria-label="LuHe Carpet Cleaning on Facebook">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M13.5 21v-7.5h2.5l.4-3h-2.9V8.6c0-.9.3-1.5 1.5-1.5h1.5V4.4a17.6 17.6 0 0 0-2.2-.1c-2.2 0-3.7 1.3-3.7 3.8V10.5H8v3h2.6V21z"/></svg>
+        </a>
+      </div>
+    </div>
+    <div>
+      <h3 data-i18n="foot.contact">Contact</h3>
+      <a href="tel:+15087368397">(508) 736-8397</a>
+      <a href="mailto:luhecleaning@gmail.com">luhecleaning@gmail.com</a>
+      <a href="https://wa.me/15087368397" target="_blank" rel="noopener">WhatsApp</a>
+      <a href="contact.html" data-i18n="foot.contactPage">Contact Page</a>
+    </div>
+    <div>
+      <h3 data-i18n="foot.area">Service Area</h3>
+      <a href="index.html">Shrewsbury, MA</a>
+      <a href="index.html">Worcester, MA</a>
+      <a href="index.html">Northborough / Westborough</a>
+      <a href="index.html">Marlborough / Natick</a>
+      <a href="index.html">Bellingham area</a>
+    </div>
+    <div>
+      <h3 data-i18n="foot.services">Services</h3>
+      <a href="index.html#services" data-i18n="svcCard.carpet.t">Carpet Cleaning</a>
+      <a href="index.html#services" data-i18n="foot.sofa">Sofa &amp; Upholstery</a>
+      <a href="index.html#services" data-i18n="svcCard.mattress.t">Mattress Cleaning</a>
+      <a href="index.html#services" data-i18n="svcCard.rug.t">Area Rug Cleaning</a>
+      <a href="index.html#services" data-i18n="svcCard.chair.t">Chair Cleaning</a>
+    </div>
+  </div>
+  <div class="copyright">
+    <span>© <span id="yr">2026</span> LuHe Carpet Cleaning. <span data-i18n="foot.rights">All rights reserved.</span> · <a href="privacy-policy.html" data-i18n="foot.privacy">Privacy Policy</a></span>
+    <span>Shrewsbury, MA · MetroWest · Central MA</span>
+  </div>
+</footer>
+
+<!-- WhatsApp float -->
+<a class="wa-float" href="https://wa.me/15087368397?text=Hi%20LuHe%20Cleaning%2C%20I%27d%20like%20a%20free%20quote." target="_blank" rel="noopener" aria-label="Message LuHe Carpet Cleaning on WhatsApp">
+  <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.52 3.48A11.86 11.86 0 0 0 12 0C5.37 0 0 5.37 0 12c0 2.11.55 4.18 1.6 6L0 24l6.18-1.62A11.93 11.93 0 0 0 12 24c6.63 0 12-5.37 12-12 0-3.21-1.25-6.22-3.48-8.52zM12 21.82a9.83 9.83 0 0 1-5.02-1.38l-.36-.21-3.67.96.98-3.58-.23-.37A9.84 9.84 0 1 1 12 21.82zm5.41-7.36c-.3-.15-1.76-.87-2.04-.97-.27-.1-.47-.15-.67.15-.2.3-.78.97-.95 1.17-.18.2-.35.22-.65.07a8.06 8.06 0 0 1-2.36-1.46 8.96 8.96 0 0 1-1.65-2.05c-.17-.3-.02-.46.13-.61.14-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.66-1.6-.91-2.2-.24-.58-.49-.5-.66-.51-.17-.01-.37-.01-.57-.01a1.09 1.09 0 0 0-.79.37c-.27.3-1.04 1.02-1.04 2.49 0 1.47 1.07 2.89 1.22 3.09.15.2 2.1 3.21 5.1 4.5.71.31 1.27.5 1.7.64.71.23 1.36.2 1.87.12.57-.08 1.76-.72 2.01-1.41.25-.69.25-1.28.17-1.41-.07-.13-.27-.2-.57-.35z"/></svg>
+</a>
+
+<!-- Mobile sticky bar -->
+<nav class="mobile-bar" aria-label="Mobile contact actions">
+  <a class="b-call" href="tel:+15087368397">
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19.23 15.26l-2.54-.29a1.5 1.5 0 0 0-1.31.43l-1.84 1.84a14.4 14.4 0 0 1-6.59-6.59l1.85-1.85a1.5 1.5 0 0 0 .43-1.31L8.94 4.96A1.5 1.5 0 0 0 7.45 3.7H5.07A1.5 1.5 0 0 0 3.59 5.3 16.31 16.31 0 0 0 18.7 20.41a1.5 1.5 0 0 0 1.6-1.49v-2.36a1.5 1.5 0 0 0-1.27-1.3z"/></svg>
+    <span data-i18n="mb.call">Call Now</span>
+  </a>
+  <a class="b-wa" href="sms:+15087368397?&amp;body=Hi%20LuHe%20Cleaning%2C%20I%27d%20like%20a%20free%20quote." aria-label="Text LuHe Carpet Cleaning">
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20 2H4a2 2 0 0 0-2 2v18l4-4h14a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2zm-2 11H6v-2h12v2zm0-4H6V7h12v2z"/></svg>
+    <span data-i18n="mb.text">Text Us</span>
+  </a>
+</nav>
+
+<!-- Cookie Consent Banner -->
+<div id="cookie-consent-banner" class="cookie-banner" style="display:none;">
+  <div class="cookie-banner-content">
+    <p><span data-i18n="cookie.text">We use cookies to optimize our website, analyze traffic, and support advertising. By clicking 'Accept All', you consent to our use of cookies.</span> <a href="privacy-policy.html" data-i18n="foot.privacy">Privacy Policy</a></p>
+    <div class="cookie-banner-buttons">
+      <button id="btn-accept-all" class="btn btn-primary btn-sm" data-i18n="cookie.accept">Accept All</button>
+      <button id="btn-reject-all" class="btn btn-ghost btn-sm" data-i18n="cookie.reject">Reject</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  // --- Mobile menu + year ---
+  var t=document.getElementById('navToggle'),m=document.getElementById('menu');
+  t&&t.addEventListener('click',function(){var o=m.classList.toggle('open');t.setAttribute('aria-expanded',o)});
+  document.querySelectorAll('#menu a').forEach(function(a){a.addEventListener('click',function(){m.classList.remove('open');t&&t.setAttribute('aria-expanded',false)})});
+  var y=document.getElementById('yr');if(y)y.textContent=new Date().getFullYear();
+
+  // --- Language switcher engine ---
+  var SUPPORTED=['en','pt','es'];
+  var currentLang='en';
+  
+  var TRANSLATIONS = {
+    "en": {
+      "pp.title": "Privacy Policy — LuHe Carpet Cleaning",
+      "top.serving": "Serving Shrewsbury, Worcester & Central MA",
+      "menu.services": "Services",
+      "menu.results": "Results",
+      "menu.process": "Process",
+      "menu.reviews": "Reviews",
+      "menu.faq": "FAQ",
+      "menu.contact": "Contact",
+      "header.callBtn": "Call",
+      "foot.tagline": "Carpet, sofa and upholstery cleaning in Shrewsbury, Worcester & Central MA. 5.0 ★ Google Rating.",
+      "foot.contact": "Contact",
+      "foot.area": "Service Area",
+      "foot.services": "Services",
+      "foot.sofa": "Sofa & Upholstery",
+      "foot.rights": "All rights reserved.",
+      "foot.privacy": "Privacy Policy",
+      "foot.contactPage": "Contact Page",
+      "mb.call": "Call Now",
+      "mb.text": "Text Us",
+      "cookie.text": "We use cookies to optimize our website, analyze traffic, and support advertising. By clicking 'Accept All', you consent to our use of cookies.",
+      "cookie.accept": "Accept All",
+      "cookie.reject": "Reject",
+      "pp.h1": "Privacy Policy",
+      "pp.subtitle": "Last Updated: June 2026",
+      "pp.intro": "At LuHe Carpet Cleaning, accessible from https://luhecleaning.com, one of our main priorities is the privacy of our visitors. This Privacy Policy document contains types of information that is collected and recorded by our website and how we use it.",
+      "pp.sec1.t": "1. Information We Collect",
+      "pp.sec1.d": "We collect information that you provide directly to us through our forms (Get Your Free Quote / Contact Form). This includes:",
+      "pp.sec1.li1": "<strong>Personal Information:</strong> Name, Phone number, Email address, and details of the service you request.",
+      "pp.sec1.li2": "<strong>Message details & Attachments:</strong> Any messages, notes, and photos you upload to describe what needs cleaning.",
+      "pp.sec1.li3": "<strong>Automated Information:</strong> We also collect information automatically using cookies, including your IP address, browser type, page views, and navigation statistics to analyze website traffic.",
+      "pp.sec2.t": "2. How We Use Your Information",
+      "pp.sec2.d": "We use the collected information in the following ways:",
+      "pp.sec2.li1": "To provide, operate, and maintain our website.",
+      "pp.sec2.li2": "To process and reply to your quote requests, schedule cleanings, and contact you.",
+      "pp.sec2.li3": "To send automated email notifications (such as confirmation emails via Resend).",
+      "pp.sec2.li4": "To track and analyze website traffic, conversion performance, and the effectiveness of our advertising campaigns.",
+      "pp.sec3.t": "3. Cookies and Advertising Services",
+      "pp.sec3.d": "We utilize standard tracking tools to measure the success of our advertising and optimize our platform. These tools place cookies on your device and are subject to your consent:",
+      "pp.sec3.li1": "<strong>Google Tag Manager & GA4:</strong> We use Google Tag Manager to coordinate tracking scripts and Google Analytics 4 to understand visitor behavior. These services help us analyze traffic and user activity.",
+      "pp.sec3.li2": "<strong>Google Ads & Meta Pixel:</strong> We use Google Ads and Meta Pixel tracking to run advertising campaigns and measure whether clicks on ads lead to form submissions or phone calls.",
+      "pp.sec3.li3": "<strong>Consent Mode v2:</strong> We respect your choices. Cookies are only initialized for advertising and analytics if you click 'Accept All' on our consent banner.",
+      "pp.sec4.t": "4. Sharing and Protection of Data",
+      "pp.sec4.d": "We do not sell or lease your personal information. Your info is stored securely and is only shared with trusted service providers to run technical operations (such as Vercel for hosting, and Resend for sending confirmation emails). We enforce SSL/HTTPS encryption across our entire site to protect data in transit.",
+      "pp.sec5.t": "5. Your Rights and Contact Info",
+      "pp.sec5.d": "You have the right to request access, correction, or deletion of your personal data at any time. To exercise these rights, or if you have questions about this policy, please contact us:",
+      "pp.sec5.li1": "<strong>LuHe Carpet Cleaning</strong>",
+      "pp.sec5.li2": "Email: luhecleaning@gmail.com",
+      "pp.sec5.li3": "Phone: (508) 736-8397",
+      "pp.sec5.li4": "Address: Shrewsbury, Massachusetts"
+    },
+    "pt": {
+      "pp.title": "Política de Privacidade — LuHe Carpet Cleaning",
+      "top.serving": "Atendendo Shrewsbury, Worcester e Central MA",
+      "menu.services": "Serviços",
+      "menu.results": "Resultados",
+      "menu.process": "Como Funciona",
+      "menu.reviews": "Avaliações",
+      "menu.faq": "Perguntas",
+      "menu.contact": "Contato",
+      "header.callBtn": "Ligar",
+      "foot.tagline": "Limpeza de carpete, sofá e estofado em Shrewsbury, Worcester e Central MA. 5.0 ★ Avaliação no Google.",
+      "foot.contact": "Contato",
+      "foot.area": "Área Atendida",
+      "foot.services": "Serviços",
+      "foot.sofa": "Sofá e Estofado",
+      "foot.rights": "Todos os direitos reservados.",
+      "foot.privacy": "Política de Privacidade",
+      "foot.contactPage": "Página de Contato",
+      "mb.call": "Ligar",
+      "mb.text": "SMS",
+      "cookie.text": "Usamos cookies para otimizar nosso site, analisar o tráfego e apoiar publicidade. Ao clicar em 'Aceitar Todos', você consente com o uso de cookies.",
+      "cookie.accept": "Aceitar Todos",
+      "cookie.reject": "Rejeitar",
+      "pp.h1": "Política de Privacidade",
+      "pp.subtitle": "Última Atualização: Junho de 2026",
+      "pp.intro": "Na LuHe Carpet Cleaning, acessível em https://luhecleaning.com, uma de nossas principais prioridades é a privacidade dos nossos visitantes. Esta Política de Privacidade descreve quais tipos de informações são coletadas e registradas pelo nosso site e como as utilizamos.",
+      "pp.sec1.t": "1. Informações que Coletamos",
+      "pp.sec1.d": "Coletamos as informações que você nos fornece diretamente através de nossos formulários (Orçamento / Contato). Isso inclui:",
+      "pp.sec1.li1": "<strong>Informações Pessoais:</strong> Nome, número de telefone, endereço de e-mail e detalhes do serviço solicitado.",
+      "pp.sec1.li2": "<strong>Detalhes da Mensagem e Anexos:</strong> Mensagens, notas e fotos que você envia para descrever o que precisa de limpeza.",
+      "pp.sec1.li3": "<strong>Informações Automáticas:</strong> Também coletamos informações automaticamente usando cookies, incluindo seu endereço IP, tipo de navegador, páginas visualizadas e estatísticas de navegação para analisar o tráfego do site.",
+      "pp.sec2.t": "2. Como Usamos suas Informações",
+      "pp.sec2.d": "Usamos as informações coletadas das seguintes formas:",
+      "pp.sec2.li1": "Para fornecer, operar e manter nosso site.",
+      "pp.sec2.li2": "Para processar e responder aos seus pedidos de orçamento, agendar limpezas e entrar em contato com você.",
+      "pp.sec2.li3": "Para enviar notificações automáticas por e-mail (como e-mails de confirmação via Resend).",
+      "pp.sec2.li4": "Para rastrear e analisar o tráfego do site, o desempenho das conversões e a eficácia de nossas campanhas de publicidade.",
+      "pp.sec3.t": "3. Cookies e Serviços de Publicidade",
+      "pp.sec3.d": "Utilizamos ferramentas padrão de rastreamento para medir o sucesso da nossa publicidade e otimizar nossa plataforma. Essas ferramentas colocam cookies no seu dispositivo e estão sujeitas ao seu consentimento:",
+      "pp.sec3.li1": "<strong>Google Tag Manager e GA4:</strong> Usamos o Google Tag Manager para coordenar scripts de rastreamento e o Google Analytics 4 para entender o comportamento dos visitantes. Esses serviços nos ajudam a analisar o tráfego.",
+      "pp.sec3.li2": "<strong>Google Ads e Meta Pixel:</strong> Usamos o rastreamento do Google Ads e Meta Pixel para executar campanhas publicitárias e medir se os cliques em anúncios levam ao envio de formulários ou chamadas telefônicas.",
+      "pp.sec3.li3": "<strong>Consent Mode v2:</strong> Respeitamos suas escolhas. Os cookies só são inicializados para publicidade e análises se você clicar em 'Aceitar Todos' em nosso banner de consentimento.",
+      "pp.sec4.t": "4. Compartilhamento e Proteção de Dados",
+      "pp.sec4.d": "Não vendemos ou alugamos suas informações pessoais. Suas informações são armazenadas de forma segura e só são compartilhadas com provedores de serviços confiáveis para executar operações técnicas (como a Vercel para hospedagem e Resend para envio de e-mails de confirmação). Exigimos criptografia SSL/HTTPS em todo o nosso site para proteger os dados em trânsito.",
+      "pp.sec5.t": "5. Seus Direitos e Informações de Contato",
+      "pp.sec5.d": "Você tem o direito de solicitar o acesso, correção ou exclusão de seus dados pessoais a qualquer momento. Para exercer esses direitos, ou se tiver dúvidas sobre esta política, entre em contato conosco:",
+      "pp.sec5.li1": "<strong>LuHe Carpet Cleaning</strong>",
+      "pp.sec5.li2": "E-mail: luhecleaning@gmail.com",
+      "pp.sec5.li3": "Telefone: (508) 736-8397",
+      "pp.sec5.li4": "Endereço: Shrewsbury, Massachusetts"
+    },
+    "es": {
+      "pp.title": "Política de Privacidad — LuHe Carpet Cleaning",
+      "top.serving": "Sirviendo Shrewsbury, Worcester y Central MA",
+      "menu.services": "Servicios",
+      "menu.results": "Resultados",
+      "menu.process": "Proceso",
+      "menu.reviews": "Reseñas",
+      "menu.faq": "Preguntas",
+      "menu.contact": "Contacto",
+      "header.callBtn": "Llamar",
+      "foot.tagline": "Limpieza de alfombra, sofá y tapicería en Shrewsbury, Worcester y Central MA. 5.0 ★ Calificación en Google.",
+      "foot.contact": "Contacto",
+      "foot.area": "Área de Servicio",
+      "foot.services": "Servicios",
+      "foot.sofa": "Sofá y Tapicería",
+      "foot.rights": "Todos los derechos reservados.",
+      "foot.privacy": "Política de Privacidad",
+      "foot.contactPage": "Página de Contacto",
+      "mb.call": "Llamar",
+      "mb.text": "SMS",
+      "cookie.text": "Utilizamos cookies para optimizar nuestro sitio web, analizar el tráfico y respaldar la publicidad. Al hacer clic en 'Aceptar Todo', acepta nuestro uso de cookies.",
+      "cookie.accept": "Aceptar Todo",
+      "cookie.reject": "Rechazar",
+      "pp.h1": "Política de Privacidad",
+      "pp.subtitle": "Última actualización: Junio de 2026",
+      "pp.intro": "En LuHe Carpet Cleaning, accesible desde https://luhecleaning.com, una de nuestras principales prioridades es la privacidad de nuestros visitantes. Este documento de Política de Privacidad contiene los tipos de información que recopila y registra nuestro sitio web y cómo la utilizamos.",
+      "pp.sec1.t": "1. Información que Recopilamos",
+      "pp.sec1.d": "Recopilamos la información que nos proporciona directamente a través de nuestros formularios (Obtener su Cotización Gratis / Formulario de Contacto). Esto incluye:",
+      "pp.sec1.li1": "<strong>Información Personal:</strong> Nombre, número de teléfono, dirección de correo electrónico y detalles del servicio que solicita.",
+      "pp.sec1.li2": "<strong>Detalles del Mensaje y Archivos Adjuntos:</strong> Cualquier mensaje, nota y foto que suba para describir lo que necesita limpieza.",
+      "pp.sec1.li3": "<strong>Información Automatizada:</strong> También recopilamos información automáticamente mediante el uso de cookies, incluida su dirección IP, tipo de navegador, páginas visitadas y estadísticas de navegación para analizar el tráfico del sitio web.",
+      "pp.sec2.t": "2. Cómo Utilizamos su Información",
+      "pp.sec2.d": "Utilizamos la información recopilada de las siguientes maneras:",
+      "pp.sec2.li1": "Para proporcionar, operar y mantener nuestro sitio web.",
+      "pp.sec2.li2": "Para procesar y responder a sus solicitudes de cotización, programar limpieas y ponernos en contacto con usted.",
+      "pp.sec2.li3": "Para enviar notificaciones automáticas por correo electrónico (como correos de confirmación a través de Resend).",
+      "pp.sec2.li4": "Para rastrear y analizar el tráfico del sitio web, el rendimiento de la conversión y la eficacia de nuestras campañas publicitarias.",
+      "pp.sec3.t": "3. Cookies y Servicios Publicitarios",
+      "pp.sec3.d": "Utilizamos herramientas de seguimiento estándar para medir el éxito de nuestra publicidad y optimizar nuestra plataforma. Estas herramientas colocan cookies en su dispositivo y están sujetas a su consentimiento:",
+      "pp.sec3.li1": "<strong>Google Tag Manager y GA4:</strong> Utilizamos Google Tag Manager para coordinar los scripts de seguimiento y Google Analytics 4 para comprender el comportamiento de los visitantes. Estos servicios nos ayudan a analizar el tráfico.",
+      "pp.sec3.li2": "<strong>Google Ads y Meta Pixel:</strong> Utilizamos el seguimiento de Google Ads y Meta Pixel para ejecutar campañas publicitarias y medir si los clics en los anuncios conducen a envíos de formularios o llamadas telefónicas.",
+      "pp.sec3.li3": "<strong>Consent Mode v2:</strong> Respetamos sus elecciones. Las cookies solo se inicializan para publicidad y análisis si hace clic en 'Aceptar Todo' en nuestro banner de consentimiento.",
+      "pp.sec4.t": "4. Intercambio y Protección de Datos",
+      "pp.sec4.d": "No vendemos ni alquilamos su información personal. Su información se almacena de forma segura y solo se comparte con proveedores de servicios de confianza para realizar operaciones técnicas (como Vercel para el alojamiento y Resend para el envío de correos electrónicos de confirmación). Aplicamos el cifrado SSL/HTTPS en todo nuestro sitio para proteger los datos en tránsito.",
+      "pp.sec5.t": "5. Sus Derechos e Información de Contacto",
+      "pp.sec5.d": "Tiene derecho a solicitar el acceso, la corrección o la eliminación de sus datos personales en cualquier momento. Para ejercer estos derechos, o si tiene preguntas sobre esta política, comuníquese con nosotros:",
+      "pp.sec5.li1": "<strong>LuHe Carpet Cleaning</strong>",
+      "pp.sec5.li2": "Correo electrónico: luhecleaning@gmail.com",
+      "pp.sec5.li3": "Teléfono: (508) 736-8397",
+      "pp.sec5.li4": "Dirección: Shrewsbury, Massachusetts"
+    }
+  };
+
+  function buildPrivacyContent(lang) {
+    var dict = TRANSLATIONS[lang] || TRANSLATIONS['en'];
+    var html = '';
+    html += '<h1>' + dict['pp.h1'] + '</h1>';
+    html += '<p style="color:var(--muted); font-size:14px; margin-top:-10px; margin-bottom:24px;">' + dict['pp.subtitle'] + '</p>';
+    html += '<p>' + dict['pp.intro'] + '</p>';
+    
+    html += '<h2>' + dict['pp.sec1.t'] + '</h2>';
+    html += '<p>' + dict['pp.sec1.d'] + '</p>';
+    html += '<ul>';
+    html += '<li>' + dict['pp.sec1.li1'] + '</li>';
+    html += '<li>' + dict['pp.sec1.li2'] + '</li>';
+    html += '<li>' + dict['pp.sec1.li3'] + '</li>';
+    html += '</ul>';
+
+    html += '<h2>' + dict['pp.sec2.t'] + '</h2>';
+    html += '<p>' + dict['pp.sec2.d'] + '</p>';
+    html += '<ul>';
+    html += '<li>' + dict['pp.sec2.li1'] + '</li>';
+    html += '<li>' + dict['pp.sec2.li2'] + '</li>';
+    html += '<li>' + dict['pp.sec2.li3'] + '</li>';
+    html += '<li>' + dict['pp.sec2.li4'] + '</li>';
+    html += '</ul>';
+
+    html += '<h2>' + dict['pp.sec3.t'] + '</h2>';
+    html += '<p>' + dict['pp.sec3.d'] + '</p>';
+    html += '<ul>';
+    html += '<li>' + dict['pp.sec3.li1'] + '</li>';
+    html += '<li>' + dict['pp.sec3.li2'] + '</li>';
+    html += '<li>' + dict['pp.sec3.li3'] + '</li>';
+    html += '</ul>';
+
+    html += '<h2>' + dict['pp.sec4.t'] + '</h2>';
+    html += '<p>' + dict['pp.sec4.d'] + '</p>';
+
+    html += '<h2>' + dict['pp.sec5.t'] + '</h2>';
+    html += '<p>' + dict['pp.sec5.d'] + '</p>';
+    html += '<ul>';
+    html += '<li>' + dict['pp.sec5.li1'] + '</li>';
+    html += '<li>' + dict['pp.sec5.li2'] + '</li>';
+    html += '<li>' + dict['pp.sec5.li3'] + '</li>';
+    html += '<li>' + dict['pp.sec5.li4'] + '</li>';
+    html += '</ul>';
+
+    var container = document.getElementById('privacy-content');
+    if (container) container.innerHTML = html;
+  }
+
+  function applyLang(lang){
+    if(SUPPORTED.indexOf(lang)<0) lang='en';
+    currentLang=lang;
+    document.documentElement.lang=lang;
+    document.querySelectorAll('.lang-btn').forEach(function(b){b.classList.toggle('active',b.getAttribute('data-lang')===lang)});
+    try{localStorage.setItem('luhe_lang',lang)}catch(e){}
+    var dict=TRANSLATIONS[lang]; if(!dict) return;
+    document.querySelectorAll('[data-i18n]').forEach(function(el){var k=el.getAttribute('data-i18n');if(dict[k]!=null)el.textContent=dict[k]});
+    
+    // Render dynamic privacy text
+    buildPrivacyContent(lang);
+  }
+
+  // Detect initial lang
+  var initLang='en';
+  try{
+    var stored=localStorage.getItem('luhe_lang');
+    if(stored && SUPPORTED.indexOf(stored)>=0) initLang=stored;
+    else{
+      var nav=(navigator.language||'').slice(0,2).toLowerCase();
+      if(SUPPORTED.indexOf(nav)>=0) initLang=nav;
+    }
+  }catch(e){}
+
+  document.querySelectorAll('.lang-btn').forEach(function(btn){
+    btn.addEventListener('click',function(){applyLang(btn.getAttribute('data-lang'))});
+  });
+  applyLang(initLang);
+
+  // --- Conversion Tracking & Event Listeners ---
+  document.addEventListener('click', function(e) {
+    var link = e.target.closest('a');
+    if (link && link.href) {
+      var href = link.href.trim();
+      if (href.startsWith('tel:')) {
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+          'event': 'phone_click',
+          'click_value': href
+        });
+      } else if (href.startsWith('sms:')) {
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+          'event': 'sms_click',
+          'click_value': href
+        });
+      } else if (href.includes('wa.me') || href.includes('api.whatsapp.com')) {
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+          'event': 'whatsapp_click',
+          'click_value': href
+        });
+      }
+    }
+  });
+
+  // --- Cookie Consent Banner Logic ---
+  var banner = document.getElementById('cookie-consent-banner');
+  var btnAccept = document.getElementById('btn-accept-all');
+  var btnReject = document.getElementById('btn-reject-all');
+  
+  if (banner && localStorage.getItem('luhe_consent') === null) {
+    banner.style.display = 'block';
+  }
+  
+  if (btnAccept) {
+    btnAccept.addEventListener('click', function() {
+      var consentObj = {
+        'ad_storage': 'granted',
+        'analytics_storage': 'granted',
+        'ad_user_data': 'granted',
+        'ad_personalization': 'granted'
+      };
+      localStorage.setItem('luhe_consent', JSON.stringify(consentObj));
+      if (window.gtag) {
+        window.gtag('consent', 'update', consentObj);
+      }
+      if (banner) banner.style.display = 'none';
+    });
+  }
+  
+  if (btnReject) {
+    btnReject.addEventListener('click', function() {
+      var consentObj = {
+        'ad_storage': 'denied',
+        'analytics_storage': 'denied',
+        'ad_user_data': 'denied',
+        'ad_personalization': 'denied'
+      };
+      localStorage.setItem('luhe_consent', JSON.stringify(consentObj));
+      if (window.gtag) {
+        window.gtag('consent', 'update', consentObj);
+      }
+      if (banner) banner.style.display = 'none';
+    });
+  }
+})();
+</script>
+</body>
+</html>
