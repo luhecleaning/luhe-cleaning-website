@@ -42,6 +42,19 @@
       });
     }
   }
+
+  // Load GA4 directly if configured
+  if (window.SITE_CONFIG && window.SITE_CONFIG.GA4_ID && window.SITE_CONFIG.GA4_ID !== 'G-XXXXXXXXXX') {
+    var gaScript = document.createElement('script');
+    gaScript.async = true;
+    gaScript.src = 'https://www.googletagmanager.com/gtag/js?id=' + window.SITE_CONFIG.GA4_ID;
+    document.head.appendChild(gaScript);
+    gtag('js', new Date());
+    gtag('config', window.SITE_CONFIG.GA4_ID);
+    if (window.SITE_CONFIG.GOOGLE_ADS_ID && window.SITE_CONFIG.GOOGLE_ADS_ID !== 'AW-XXXXXXXXXX') {
+      gtag('config', window.SITE_CONFIG.GOOGLE_ADS_ID);
+    }
+  }
 </script>
 <!-- Google Tag Manager -->
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -50,6 +63,39 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
 })(window,document,'script','dataLayer', window.SITE_CONFIG.GTM_ID);</script>
 <!-- End Google Tag Manager -->
+
+<!-- Meta Pixel Code -->
+<script>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+
+  // Set default consent for Meta Pixel based on localStorage
+  var hasConsent = localStorage.getItem('luhe_consent') !== null;
+  if (!hasConsent) {
+    fbq('consent', 'revoke');
+  } else {
+    try {
+      var savedConsent = JSON.parse(localStorage.getItem('luhe_consent'));
+      if (savedConsent.ad_storage === 'granted') {
+        fbq('consent', 'grant');
+      } else {
+        fbq('consent', 'revoke');
+      }
+    } catch(e) {
+      fbq('consent', 'revoke');
+    }
+  }
+
+  fbq('init', window.SITE_CONFIG.META_PIXEL_ID);
+  fbq('track', 'PageView');
+</script>
+<!-- End Meta Pixel Code -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#0B6FB8">
@@ -141,6 +187,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   label{font-size:13px;font-weight:600;color:#1d3a55}
   input,select,textarea{width:100%;border:1.5px solid #d5e2ee;border-radius:11px;padding:12px 14px;font-family:inherit;font-size:15px;color:var(--ink);background:#fff;transition:border-color .12s ease,box-shadow .12s ease}
   input:focus,select:focus,textarea:focus{outline:0;border-color:var(--blue);box-shadow:0 0 0 4px rgba(11,111,184,.12)}
+  input:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+  button:focus-visible, a.btn:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
   textarea{min-height:84px;resize:vertical}
   .form-fineprint{font-size:12px;color:var(--muted);margin-top:4px}
   /* sections */
@@ -368,7 +416,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       "name":"LuHe Carpet Cleaning",
       "url":"https://luhecleaning.com/",
       "image":"https://luhecleaning.com/assets/og-image.jpg",
-      "logo":"https://luhecleaning.com/assets/logo.png",
+      "logo":"https://luhecleaning.com/assets/logo.webp",
       "telephone":"+1-508-736-8397",
       "email":"luhecleaning@gmail.com",
       "priceRange":"$$",
@@ -421,14 +469,20 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <!-- Google Tag Manager (noscript) -->
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-XXXXXXX"
 height="0" width="0" style="display:none;visibility:hidden" id="gtm-noscript"></iframe></noscript>
+<!-- Meta Pixel (noscript) -->
+<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=PIXEL_ID_HERE&ev=PageView&noscript=1" id="fb-noscript"></noscript>
 <script>
-  // Dynamically update noscript iframe src if configuration matches
+  // Dynamically update noscript components if configuration matches
   var noscriptIframe = document.getElementById('gtm-noscript');
   if (noscriptIframe && window.SITE_CONFIG && window.SITE_CONFIG.GTM_ID) {
     noscriptIframe.src = 'https://www.googletagmanager.com/ns.html?id=' + window.SITE_CONFIG.GTM_ID;
   }
+  var fbNoscript = document.getElementById('fb-noscript');
+  if (fbNoscript && window.SITE_CONFIG && window.SITE_CONFIG.META_PIXEL_ID) {
+    fbNoscript.src = 'https://www.facebook.com/tr?id=' + window.SITE_CONFIG.META_PIXEL_ID + '&ev=PageView&noscript=1';
+  }
 </script>
-<!-- End Google Tag Manager (noscript) -->
+<!-- End Google Tag Manager (noscript) / Meta Pixel (noscript) -->
 
 <!-- Topbar -->
 <div class="topbar" role="region" aria-label="Top info">
@@ -450,7 +504,7 @@ height="0" width="0" style="display:none;visibility:hidden" id="gtm-noscript"></
     <a href="#top" class="brand" aria-label="LuHe Carpet Cleaning home">
       <picture>
         <source type="image/webp" srcset="assets/logo.webp">
-        <img src="assets/logo.png" alt="LuHe Carpet Cleaning — Carpet & Upholstery Cleaning in Shrewsbury &amp; Worcester, MA" width="600" height="532" loading="eager" decoding="async">
+        <img src="assets/logo.webp" alt="LuHe Carpet Cleaning — Carpet & Upholstery Cleaning in Shrewsbury &amp; Worcester, MA" width="600" height="532" loading="eager" decoding="async">
       </picture>
     </a>
     <div class="menu" id="menu">
@@ -502,7 +556,9 @@ height="0" width="0" style="display:none;visibility:hidden" id="gtm-noscript"></
       <p class="sub" data-i18n="form.subtitle">Send your details and we'll get back to you with a clear price.</p>
       <form name="quote" id="quoteForm" novalidate>
         <input type="hidden" name="lang" id="formLang" value="en">
-        <input type="hidden" name="form-name" value="quote">
+        <div style="display:none;" aria-hidden="true">
+          <input type="text" name="website_url" id="f-website-url" tabindex="-1" autocomplete="off">
+        </div>
         <div class="field"><label for="f-name" data-i18n="form.name">Name</label><input id="f-name" name="name" type="text" autocomplete="name" required placeholder="Your full name" data-i18n-placeholder="form.namePh"></div>
         <div class="field"><label for="f-phone" data-i18n="form.phone">Phone</label><input id="f-phone" name="phone" type="tel" autocomplete="tel" required placeholder="(508) 555-0101"></div>
         <div class="field"><label for="f-email"><span data-i18n="form.email">Email</span> <span style="color:var(--muted);font-weight:500" data-i18n="form.optional">(optional)</span></label><input id="f-email" name="email" type="email" autocomplete="email" placeholder="you@example.com"></div>
@@ -764,7 +820,7 @@ height="0" width="0" style="display:none;visibility:hidden" id="gtm-noscript"></
     <div class="foot-brand">
       <picture>
         <source type="image/webp" srcset="assets/logo.webp">
-        <img src="assets/logo.png" alt="LuHe Carpet Cleaning logo" width="600" height="532" loading="lazy" decoding="async">
+        <img src="assets/logo.webp" alt="LuHe Carpet Cleaning logo" width="600" height="532" loading="lazy" decoding="async">
       </picture>
       <p data-i18n="foot.tagline">Carpet, sofa and upholstery cleaning in Shrewsbury, Worcester &amp; Central MA. 5.0 ★ Google Rating.</p>
       <div class="social">
@@ -959,6 +1015,7 @@ height="0" width="0" style="display:none;visibility:hidden" id="gtm-noscript"></
     var serviceF = quoteForm.querySelector('#f-service');
     var messageF = quoteForm.querySelector('#f-msg');
     var photoF = quoteForm.querySelector('#f-photo');
+    var honeypotF = quoteForm.querySelector('#f-website-url');
     var btnSubmit = quoteForm.querySelector('#btnSubmit');
     var errorBanner = document.getElementById('form-error-banner');
 
@@ -1045,6 +1102,10 @@ height="0" width="0" style="display:none;visibility:hidden" id="gtm-noscript"></
           'form_name': formData.formName,
           'service': formData.service
         });
+        if (window.fbq) {
+          fbq('track', 'Lead');
+          fbq('track', 'SubmitApplication');
+        }
         // Redirect to thank-you page after successful submit
         window.location.href = 'thank-you.html';
       })
@@ -1072,6 +1133,7 @@ height="0" width="0" style="display:none;visibility:hidden" id="gtm-noscript"></
       var emailVal = emailF ? emailF.value.trim() : '';
       var serviceVal = serviceF ? serviceF.value : '';
       var messageVal = messageF ? messageF.value.trim() : '';
+      var hpVal = honeypotF ? honeypotF.value : '';
 
       if (!nameVal) {
         setErr(nameF, getMsg('validation.name')); ok = false; first = first || nameF;
@@ -1122,7 +1184,8 @@ height="0" width="0" style="display:none;visibility:hidden" id="gtm-noscript"></
         service: serviceVal,
         message: messageVal,
         lang: currentLang,
-        formName: 'quote'
+        formName: 'quote',
+        website_url: hpVal
       };
 
       if (file) {
@@ -1142,26 +1205,34 @@ height="0" width="0" style="display:none;visibility:hidden" id="gtm-noscript"></
         window.dataLayer = window.dataLayer || [];
         window.dataLayer.push({
           'event': 'phone_call_clicked',
+          'event_name': 'phone_click',
           'click_value': href
         });
+        if (window.fbq) fbq('track', 'Contact');
       } else if (href.startsWith('sms:')) {
         window.dataLayer = window.dataLayer || [];
         window.dataLayer.push({
           'event': 'sms_clicked',
+          'event_name': 'sms_click',
           'click_value': href
         });
+        if (window.fbq) fbq('track', 'Contact');
       } else if (href.includes('wa.me') || href.includes('api.whatsapp.com')) {
         window.dataLayer = window.dataLayer || [];
         window.dataLayer.push({
           'event': 'whatsapp_clicked',
+          'event_name': 'whatsapp_click',
           'click_value': href
         });
+        if (window.fbq) fbq('track', 'Contact');
       } else if (href.startsWith('#quote') || (link.getAttribute('href') === '#quote')) {
         window.dataLayer = window.dataLayer || [];
         window.dataLayer.push({
           'event': 'quote_cta_click',
+          'event_name': 'quote_click',
           'cta_name': link.innerText || link.ariaLabel || 'Quote CTA'
         });
+        if (window.fbq) fbq('track', 'Schedule');
       }
     }
   });

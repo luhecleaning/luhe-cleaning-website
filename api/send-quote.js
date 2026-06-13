@@ -9,6 +9,33 @@ const REPLY_TO = "luhecleaning@gmail.com";
 const COMPANY_PHONE = "(508) 736-8397";
 const COMPANY_SITE = "https://luhecleaning.com";
 
+// In-memory rate limiting map for serverless instances
+const ipCache = new Map();
+
+function isRateLimited(ip) {
+  const now = Date.now();
+  const limit = 5; // max 5 requests
+  const timeframe = 60000; // 1 minute
+  
+  if (!ip) return false;
+  
+  if (!ipCache.has(ip)) {
+    ipCache.set(ip, [now]);
+    return false;
+  }
+  
+  let timestamps = ipCache.get(ip);
+  timestamps = timestamps.filter(t => now - t < timeframe);
+  
+  if (timestamps.length >= limit) {
+    return true;
+  }
+  
+  timestamps.push(now);
+  ipCache.set(ip, timestamps);
+  return false;
+}
+
 // HTML escaping helper
 function safe(value, fallback = "Not provided") {
   return String(value || fallback)
@@ -119,8 +146,21 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: `Method ${req.method} Not Allowed` });
   }
 
+  // Rate Limiting Check
+  const clientIp = req.headers['x-forwarded-for'] || req.headers['x-real-ip'] || req.socket.remoteAddress;
+  if (isRateLimited(clientIp)) {
+    console.warn(`Rate limit exceeded for IP: ${clientIp}`);
+    return res.status(429).json({ error: "Too many requests. Please try again later." });
+  }
+
   try {
-    const { name, phone, email, service, message, photo, lang, formName } = req.body;
+    const { name, phone, email, service, message, photo, lang, formName, website_url } = req.body;
+
+    // Honeypot spam check
+    if (website_url && website_url.trim()) {
+      console.warn("Spam submission blocked via honeypot field.");
+      return res.status(200).json({ success: true, message: "Request processed successfully." });
+    }
 
     // Server-side validations
     if (!name || !name.trim()) {
@@ -128,6 +168,12 @@ export default async function handler(req, res) {
     }
     if (!phone || !phone.trim() || phone.replace(/\D/g, "").length < 10) {
       return res.status(400).json({ error: "Valid phone number is required." });
+    }
+    if (email && email.trim()) {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(email.trim())) {
+        return res.status(400).json({ error: "Valid email address is required." });
+      }
     }
     if (!service || !service.trim()) {
       return res.status(400).json({ error: "Service is required." });
