@@ -166,7 +166,7 @@ export default async function handler(req, res) {
     // Send admin notification
     const adminMailResponse = await resend.emails.send({
       from: FROM_EMAIL,
-      to: COMPANY_EMAIL,
+      to: COMPANY_EMAIL.split(',').map(email => email.trim()).filter(Boolean),
       replyTo: lead.email || REPLY_TO,
       subject: `New Lead [${lead.formName}] - ${lead.service}`,
       html: adminEmail(lead),
