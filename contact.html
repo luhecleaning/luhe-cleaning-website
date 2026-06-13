@@ -601,6 +601,7 @@ height="0" width="0" style="display:none;visibility:hidden" id="gtm-noscript"></
       "validation.name": "Please enter your name.",
       "validation.phone": "Please enter your phone number.",
       "validation.phoneInvalid": "Please enter a valid 10-digit phone number.",
+      "validation.service": "Please select a service.",
       "validation.emailInvalid": "Please enter a valid email address.",
       "validation.messageTooLong": "Message cannot exceed 1000 characters.",
       "validation.photoTooLarge": "Photo size cannot exceed 5MB.",
@@ -663,6 +664,7 @@ height="0" width="0" style="display:none;visibility:hidden" id="gtm-noscript"></
       "validation.name": "Por favor, insira seu nome.",
       "validation.phone": "Por favor, insira seu número de telefone.",
       "validation.phoneInvalid": "Por favor, insira um número de telefone válido com 10 dígitos.",
+      "validation.service": "Por favor, selecione um serviço.",
       "validation.emailInvalid": "Por favor, insira um e-mail válido.",
       "validation.messageTooLong": "A mensagem não pode exceder 1000 caracteres.",
       "validation.photoTooLarge": "O tamanho da foto não pode exceder 5MB.",
@@ -725,6 +727,7 @@ height="0" width="0" style="display:none;visibility:hidden" id="gtm-noscript"></
       "validation.name": "Por favor, introduce tu nombre.",
       "validation.phone": "Por favor, introduce tu número de teléfono.",
       "validation.phoneInvalid": "Por favor, introduce un número de teléfono válido de 10 dígitos.",
+      "validation.service": "Por favor, selecciona un servicio.",
       "validation.emailInvalid": "Por favor, introduce un correo electrónico válido.",
       "validation.messageTooLong": "El mensaje no puede superar los 1000 caracteres.",
       "validation.photoTooLarge": "El tamaño de la foto no puede superar los 5MB.",
@@ -977,19 +980,19 @@ height="0" width="0" style="display:none;visibility:hidden" id="gtm-noscript"></
       if (href.startsWith('tel:')) {
         window.dataLayer = window.dataLayer || [];
         window.dataLayer.push({
-          'event': 'phone_click',
+          'event': 'phone_call_clicked',
           'click_value': href
         });
       } else if (href.startsWith('sms:')) {
         window.dataLayer = window.dataLayer || [];
         window.dataLayer.push({
-          'event': 'sms_click',
+          'event': 'sms_clicked',
           'click_value': href
         });
       } else if (href.includes('wa.me') || href.includes('api.whatsapp.com')) {
         window.dataLayer = window.dataLayer || [];
         window.dataLayer.push({
-          'event': 'whatsapp_click',
+          'event': 'whatsapp_clicked',
           'click_value': href
         });
       }

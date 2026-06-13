@@ -603,19 +603,19 @@ height="0" width="0" style="display:none;visibility:hidden" id="gtm-noscript"></
       if (href.startsWith('tel:')) {
         window.dataLayer = window.dataLayer || [];
         window.dataLayer.push({
-          'event': 'phone_click',
+          'event': 'phone_call_clicked',
           'click_value': href
         });
       } else if (href.startsWith('sms:')) {
         window.dataLayer = window.dataLayer || [];
         window.dataLayer.push({
-          'event': 'sms_click',
+          'event': 'sms_clicked',
           'click_value': href
         });
       } else if (href.includes('wa.me') || href.includes('api.whatsapp.com')) {
         window.dataLayer = window.dataLayer || [];
         window.dataLayer.push({
-          'event': 'whatsapp_click',
+          'event': 'whatsapp_clicked',
           'click_value': href
         });
       }
