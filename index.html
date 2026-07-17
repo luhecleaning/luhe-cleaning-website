@@ -936,14 +936,14 @@ height="0" width="0" style="display:none;visibility:hidden" id="gtm-noscript"></
       "validation.service": "Por favor, selecciona un servicio.",
       "validation.emailInvalid": "Por favor, introduce un correo electrónico válido.",
       "validation.messageTooLong": "El mensaje no puede superar los 1000 caracteres.",
-      "validation.photoTooLarge": "El tamanho de la foto no puede superar los 5MB.",
+      "validation.photoTooLarge": "El tamaño de la foto no puede superar los 5 MB.",
       "validation.submitError": "Error al enviar la solicitud. Por favor intenta de nuevo o llámanos.",
       "validation.sending": "Enviando...",
       "cookie.text": "Utilizamos cookies para optimizar nuestro sitio web, analizar el tráfico y respaldar la publicidad. Al hacer clic en 'Aceptar Todo', acepta nuestro uso de cookies.",
       "cookie.accept": "Aceptar Todo",
       "cookie.reject": "Rechazar",
       "foot.privacy": "Política de Privacidad",
-      "foot.contactPage": "Página de Contato",
+      "foot.contactPage": "Página de Contacto",
       "menu.contact": "Contacto",
       "form.privacyConsent": "Al enviar, aceptas nuestra <a href=\"privacy-policy.html\" style=\"color:var(--blue);text-decoration:underline;\">Política de Privacidad</a>."
     }
@@ -965,7 +965,8 @@ height="0" width="0" style="display:none;visibility:hidden" id="gtm-noscript"></
     document.querySelectorAll('.lang-btn').forEach(function(b){b.classList.toggle('active',b.getAttribute('data-lang')===lang)});
     try{localStorage.setItem('luhe_lang',lang)}catch(e){}
     var dict=TRANSLATIONS[lang]; if(!dict) return;
-    document.querySelectorAll('[data-i18n]').forEach(function(el){var k=el.getAttribute('data-i18n');if(dict[k]!=null)el.textContent=dict[k]});
+    var HTML_KEYS = {'form.privacyConsent': true};
+    document.querySelectorAll('[data-i18n]').forEach(function(el){var k=el.getAttribute('data-i18n');if(dict[k]!=null){if(HTML_KEYS[k])el.innerHTML=dict[k];else el.textContent=dict[k];}});
     document.querySelectorAll('[data-i18n-placeholder]').forEach(function(el){var k=el.getAttribute('data-i18n-placeholder');if(dict[k]!=null)el.placeholder=dict[k]});
     // Refresh photo upload label if no file is selected
     var fName=document.getElementById('fileName'),photoIn=document.getElementById('f-photo');

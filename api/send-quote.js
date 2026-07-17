@@ -191,7 +191,7 @@ export default async function handler(req, res) {
       service: service.trim(),
       message: (message || "").trim(),
       lang: lang || "en",
-      formName: formName || "quote"
+      formName: (formName || "website").trim().slice(0, 50)
     };
 
     // Prepare attachments if photo is provided as base64
