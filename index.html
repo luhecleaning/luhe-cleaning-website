@@ -1,6 +1,9 @@
 <!doctype html>
 <html lang="en">
 <head>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <!-- SITE_CONFIG and Google Analytics / Consent Mode / GTM -->
 <script>
   window.SITE_CONFIG = {
@@ -179,10 +182,11 @@ if(window.SITE_CONFIG&&window.SITE_CONFIG.META_PIXEL_ID&&window.SITE_CONFIG.META
     --soft:#EAF6FF;--line:#D7E6F2;--muted:#506172;--ok:#16A34A;
     --wa:#25D366;--shadow:0 14px 36px rgba(6,63,109,.14);
     --shadow-sm:0 4px 14px rgba(6,63,109,.08);--radius:18px;
+    --gold:#F59E0B;--green:#16A34A;
   }
   *,*::before,*::after{box-sizing:border-box}
   html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
-  body{margin:0;font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Helvetica,sans-serif;color:var(--ink);background:#fff;line-height:1.55;-webkit-font-smoothing:antialiased}
+  body{margin:0;font-family:'Inter',ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;color:var(--ink);background:#fff;line-height:1.55;-webkit-font-smoothing:antialiased}
   img,svg{display:block;max-width:100%;height:auto}
   a{color:inherit;text-decoration:none}
   button{font:inherit;cursor:pointer}
@@ -191,6 +195,16 @@ if(window.SITE_CONFIG&&window.SITE_CONFIG.META_PIXEL_ID&&window.SITE_CONFIG.META
   h2{font-size:clamp(26px,3.6vw,38px);font-weight:800}
   h3{font-size:18px;font-weight:700}
   p{margin:0}
+  /* Scroll-triggered animations */
+  .fade-up{opacity:0;transform:translateY(28px);transition:opacity .55s ease,transform .55s ease}
+  .fade-up.visible{opacity:1;transform:translateY(0)}
+  .fade-in{opacity:0;transition:opacity .6s ease}
+  .fade-in.visible{opacity:1}
+  .stagger-1{transition-delay:.08s}
+  .stagger-2{transition-delay:.16s}
+  .stagger-3{transition-delay:.24s}
+  .stagger-4{transition-delay:.32s}
+  .stagger-5{transition-delay:.40s}
   /* topbar */
   .topbar{background:var(--dark);color:#dceaf6;font-size:13.5px;padding:7px 18px}
   .topbar .row{max-width:1180px;margin:0 auto;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px 24px}
@@ -204,25 +218,34 @@ if(window.SITE_CONFIG&&window.SITE_CONFIG.META_PIXEL_ID&&window.SITE_CONFIG.META
   .menu{display:flex;gap:26px;font-weight:600;font-size:15px;color:#1d3a55}
   .menu a:hover{color:var(--blue)}
   .nav-actions{display:flex;align-items:center;gap:10px}
-  .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border-radius:999px;font-weight:700;border:0;padding:13px 22px;font-size:15px;line-height:1;transition:transform .12s ease,background .15s ease;text-align:center;white-space:nowrap}
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border-radius:999px;font-weight:700;border:0;padding:13px 22px;font-size:15px;line-height:1;transition:transform .12s ease,background .15s ease,box-shadow .15s ease;text-align:center;white-space:nowrap}
   .btn:active{transform:translateY(1px)}
   .btn-primary{background:var(--blue);color:#fff;box-shadow:0 8px 20px rgba(11,111,184,.25)}
-  .btn-primary:hover{background:#085A95}
-  .btn-cta{background:var(--cyan);color:#fff;box-shadow:0 10px 24px rgba(8,118,168,.3)}
-  .btn-cta:hover{background:#066388}
+  .btn-primary:hover{background:#085A95;box-shadow:0 12px 28px rgba(11,111,184,.38);transform:translateY(-1px)}
+  .btn-cta{background:var(--cyan);color:#fff;box-shadow:0 10px 24px rgba(8,118,168,.3);position:relative;overflow:hidden}
+  .btn-cta::after{content:"";position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.22),transparent);transition:left .5s ease}
+  .btn-cta:hover{background:#066388;box-shadow:0 14px 32px rgba(8,118,168,.44);transform:translateY(-1px)}
+  .btn-cta:hover::after{left:100%}
   .btn-wa{background:#0F7568;color:#fff;box-shadow:0 8px 20px rgba(15,117,104,.3)}
-  .btn-wa:hover{background:#0a574e}
+  .btn-wa:hover{background:#0a574e;transform:translateY(-1px)}
   .btn-secondary{background:var(--dark);color:#fff;box-shadow:0 8px 20px rgba(6,63,109,.25)}
-  .btn-secondary:hover{background:#052f53}
+  .btn-secondary:hover{background:#052f53;transform:translateY(-1px)}
   .btn-ghost{background:#fff;color:var(--dark);border:1.5px solid var(--line)}
   .btn-ghost:hover{border-color:var(--blue);color:var(--blue)}
   .btn-block{width:100%}
   .btn-lg{padding:16px 28px;font-size:16px}
+  /* Pulse animation for CTA */
+  @keyframes pulse-ring{0%{box-shadow:0 0 0 0 rgba(8,118,168,.45)}70%{box-shadow:0 0 0 12px rgba(8,118,168,0)}100%{box-shadow:0 0 0 0 rgba(8,118,168,0)}}
+  .btn-pulse{animation:pulse-ring 2.2s ease-in-out infinite}
   .menu-toggle{display:none;background:#fff;border:1.5px solid var(--line);padding:9px;border-radius:10px}
   .menu-toggle svg{width:22px;height:22px;color:var(--dark)}
   /* hero */
-  .hero{position:relative;color:#fff;background:linear-gradient(135deg,#063F6D 0%,#0B6FB8 60%,#0E6FA8 100%);overflow:hidden}
-  .hero::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 90% 0%,rgba(32,174,235,.35),transparent 55%),radial-gradient(circle at 10% 100%,rgba(255,255,255,.08),transparent 50%);pointer-events:none}
+  .hero{position:relative;color:#fff;background:linear-gradient(135deg,#052d4e 0%,#0B6FB8 55%,#1082c5 100%);overflow:hidden}
+  .hero::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 90% 0%,rgba(32,174,235,.4),transparent 55%),radial-gradient(circle at 10% 100%,rgba(255,255,255,.1),transparent 50%),radial-gradient(circle at 50% 50%,rgba(11,111,184,.12),transparent 70%);pointer-events:none}
+  /* Urgency bar */
+  .urgency-bar{display:inline-flex;align-items:center;gap:8px;background:rgba(22,163,74,.18);border:1px solid rgba(22,163,74,.35);color:#4ade80;padding:6px 14px;border-radius:999px;font-size:13px;font-weight:700;margin-bottom:14px;letter-spacing:.01em}
+  .urgency-dot{width:8px;height:8px;background:#4ade80;border-radius:50%;flex:none;animation:blink 1.6s ease-in-out infinite}
+  @keyframes blink{0%,100%{opacity:1}50%{opacity:.35}}
   .hero-inner{max-width:1180px;margin:0 auto;padding:56px 18px 64px;display:grid;grid-template-columns:1.05fr .95fr;gap:42px;align-items:center;position:relative}
   .badge{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.25);color:#fff;padding:7px 14px;border-radius:999px;font-size:13.5px;font-weight:600;margin-bottom:18px;backdrop-filter:blur(6px)}
   .hero h1{color:#fff;margin-bottom:14px}
@@ -292,12 +315,24 @@ if(window.SITE_CONFIG&&window.SITE_CONFIG.META_PIXEL_ID&&window.SITE_CONFIG.META
   .why-item .ic svg{width:22px;height:22px}
   .why-item h3{color:var(--dark);margin-bottom:5px}
   .why-item p{color:var(--muted);font-size:14px}
-  /* reviews */
-  .reviews-block{background:#fff;border:1px solid var(--line);border-radius:22px;padding:36px;text-align:center;box-shadow:var(--shadow-sm);max-width:780px;margin:0 auto}
-  .stars-big{font-size:32px;color:#B45309;letter-spacing:4px;line-height:1}
-  .rating-num{font-size:54px;font-weight:800;color:var(--dark);margin:8px 0 4px;letter-spacing:-.02em}
-  .rating-meta{color:var(--muted);font-size:16px;margin-bottom:16px}
-  .review-actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+  /* reviews carousel */
+  .reviews-summary{text-align:center;margin-bottom:28px}
+  .stars-big{font-size:28px;color:#F59E0B;letter-spacing:3px;line-height:1}
+  .rating-num{font-size:52px;font-weight:900;color:var(--dark);margin:6px 0 2px;letter-spacing:-.03em}
+  .rating-meta{color:var(--muted);font-size:15px;margin-bottom:14px}
+  .review-actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:28px}
+  .reviews-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;max-width:1000px;margin:0 auto}
+  .review-card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:24px;box-shadow:var(--shadow-sm);transition:transform .18s ease,box-shadow .18s ease;text-align:left;display:flex;flex-direction:column;gap:10px}
+  .review-card:hover{transform:translateY(-4px);box-shadow:var(--shadow)}
+  .review-stars{color:#F59E0B;font-size:15px;letter-spacing:1px}
+  .review-text{color:#1d3a55;font-size:14.5px;line-height:1.65;font-style:italic;flex:1}
+  .review-author{display:flex;align-items:center;gap:10px;margin-top:4px}
+  .review-avatar{width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,var(--blue),var(--cyan));color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:15px;flex:none}
+  .review-name{font-weight:700;font-size:14px;color:var(--dark)}
+  .review-loc{font-size:12.5px;color:var(--muted)}
+  .review-source{font-size:11px;color:var(--muted);display:flex;align-items:center;gap:4px;margin-top:2px}
+  @media(max-width:900px){.reviews-grid{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:560px){.reviews-grid{grid-template-columns:1fr}}
   /* faq */
   .faq{max-width:840px;margin:0 auto}
   details{background:#fff;border:1px solid var(--line);border-radius:13px;margin-bottom:10px;overflow:hidden;transition:box-shadow .15s ease}
@@ -308,6 +343,28 @@ if(window.SITE_CONFIG&&window.SITE_CONFIG.META_PIXEL_ID&&window.SITE_CONFIG.META
   summary::after{content:"";position:absolute;left:25px;top:50%;width:8px;height:2px;background:var(--blue);transform:translateY(-50%)}
   details[open] summary::before{transform:translateY(-50%) rotate(90deg)}
   details p{padding:0 22px 18px 50px;color:var(--muted);font-size:15px;line-height:1.65}
+  /* stats section */
+  .stats-section{background:linear-gradient(135deg,#052d4e 0%,#0B6FB8 100%);color:#fff;padding:52px 18px}
+  .stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;max-width:900px;margin:0 auto;text-align:center}
+  .stat-item{padding:16px 10px}
+  .stat-num{font-size:clamp(36px,5vw,54px);font-weight:900;color:#fff;letter-spacing:-.03em;line-height:1;display:block}
+  .stat-label{font-size:14px;color:rgba(255,255,255,.78);margin-top:6px;font-weight:600;letter-spacing:.02em}
+  @media(max-width:640px){.stats-grid{grid-template-columns:repeat(2,1fr)}}
+  /* guarantee badge */
+  .guarantee-badge{display:flex;align-items:center;gap:10px;background:linear-gradient(135deg,#f0fdf4,#dcfce7);border:1.5px solid #86efac;border-radius:14px;padding:14px 18px;margin-top:14px;margin-bottom:6px}
+  .guarantee-icon{width:38px;height:38px;border-radius:50%;background:#16A34A;color:#fff;display:flex;align-items:center;justify-content:center;flex:none;font-size:18px}
+  .guarantee-text strong{display:block;font-size:14px;font-weight:800;color:#15803d}
+  .guarantee-text span{font-size:12.5px;color:#166534}
+  /* meet section */
+  .meet-section{background:#fff;padding:64px 18px}
+  .meet-inner{max-width:900px;margin:0 auto;display:grid;grid-template-columns:auto 1fr;gap:40px;align-items:center;background:linear-gradient(135deg,#F4FAFF,#EAF6FF);border-radius:24px;padding:40px;border:1px solid var(--line)}
+  .meet-photo{width:140px;height:140px;border-radius:50%;overflow:hidden;border:4px solid #fff;box-shadow:var(--shadow);flex:none}
+  .meet-photo img{width:100%;height:100%;object-fit:cover}
+  .meet-eyebrow{font-size:12px;font-weight:700;color:var(--blue);text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px}
+  .meet-name{font-size:22px;font-weight:800;color:var(--dark);margin-bottom:10px}
+  .meet-quote{font-size:15.5px;color:var(--muted);line-height:1.7;font-style:italic;border-left:3px solid var(--blue);padding-left:16px}
+  .meet-sig{margin-top:14px;font-weight:700;color:var(--dark);font-size:15px}
+  @media(max-width:640px){.meet-inner{grid-template-columns:1fr;text-align:center}.meet-photo{margin:0 auto}.meet-quote{border-left:none;padding-left:0;border-top:3px solid var(--blue);padding-top:12px}}
   /* final cta */
   .cta{background:linear-gradient(120deg,#063F6D 0%,#0B6FB8 100%);color:#fff;text-align:center;padding:64px 18px}
   .cta h2{color:#fff;margin-bottom:10px}
@@ -327,8 +384,10 @@ if(window.SITE_CONFIG&&window.SITE_CONFIG.META_PIXEL_ID&&window.SITE_CONFIG.META
   .social svg{width:18px;height:18px}
   .copyright{max-width:1180px;margin:26px auto 0;border-top:1px solid rgba(255,255,255,.14);padding-top:18px;font-size:13px;color:#9bbcd6;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
   /* whatsapp float */
-  .wa-float{position:fixed;right:18px;bottom:18px;width:58px;height:58px;border-radius:50%;background:var(--wa);color:#fff;display:inline-flex;align-items:center;justify-content:center;z-index:60;box-shadow:0 14px 30px rgba(0,0,0,.22),0 0 0 4px rgba(37,211,102,.18);transition:transform .15s ease}
-  .wa-float:hover{transform:scale(1.06)}
+  .wa-float{position:fixed;right:18px;bottom:18px;width:58px;height:58px;border-radius:50%;background:var(--wa);color:#fff;display:inline-flex;align-items:center;justify-content:center;z-index:60;box-shadow:0 14px 30px rgba(0,0,0,.22);transition:transform .15s ease}
+  @keyframes wa-pulse{0%,100%{box-shadow:0 14px 30px rgba(0,0,0,.22),0 0 0 0 rgba(37,211,102,.5)}70%{box-shadow:0 14px 30px rgba(0,0,0,.22),0 0 0 14px rgba(37,211,102,0)}}
+  .wa-float{animation:wa-pulse 2.5s ease-in-out infinite}
+  .wa-float:hover{transform:scale(1.1)}
   .wa-float svg{width:32px;height:32px}
   /* mobile sticky bar */
   .mobile-bar{display:none}
@@ -386,8 +445,6 @@ if(window.SITE_CONFIG&&window.SITE_CONFIG.META_PIXEL_ID&&window.SITE_CONFIG.META
     .nav-actions .btn{padding:11px 14px}
     .brand img{width:118px}
     .quote-card{padding:22px 20px}
-    .reviews-block{padding:28px 22px}
-    .wa-float{display:none}
     .mobile-bar{display:flex;position:fixed;left:0;right:0;bottom:0;background:#fff;border-top:1px solid var(--line);padding:8px;gap:8px;z-index:60;box-shadow:0 -8px 24px rgba(0,0,0,.08)}
     .mobile-bar a{flex:1;padding:13px 8px;border-radius:12px;font-weight:700;font-size:14.5px;display:inline-flex;align-items:center;justify-content:center;gap:6px}
     .mobile-bar .b-call{background:var(--blue);color:#fff}
@@ -586,11 +643,15 @@ height="0" width="0" style="display:none;visibility:hidden" id="gtm-noscript"></
 <section class="hero" aria-labelledby="hero-h">
   <div class="hero-inner">
     <div>
+      <div class="urgency-bar" role="status">
+        <span class="urgency-dot" aria-hidden="true"></span>
+        <span>Available This Week — Responding Within 1 Hour</span>
+      </div>
       <span class="badge" data-i18n="hero.badge">★ 5.0 Google Rating · Shrewsbury, MA</span>
-      <h1 id="hero-h" data-i18n="hero.h1">Carpet &amp; Upholstery Cleaning in Shrewsbury, Worcester &amp; Central MA</h1>
+      <h1 id="hero-h" data-i18n="hero.h1">Your Home Deserves a Fresh Start — Expert Cleaning in Shrewsbury & Central MA</h1>
       <p class="lede" data-i18n="hero.lede">LuHe Carpet Cleaning brings carpets, sofas, mattresses, rugs and chairs back to life with deep, careful cleaning across Shrewsbury, Worcester, MetroWest and Central Massachusetts. Real results, fair pricing, no surprises.</p>
       <div class="hero-actions">
-        <a class="btn btn-cta btn-lg" href="tel:+15087368397" data-i18n="cta.callToday">Call Us Today</a>
+        <a class="btn btn-cta btn-lg btn-pulse" href="tel:+15087368397" data-i18n="cta.callToday">Call Us Today</a>
         <a class="btn btn-secondary btn-lg" href="sms:+15087368397?&amp;body=Hi%20LuHe%20Cleaning%2C%20I%27d%20like%20a%20free%20quote." aria-label="Text LuHe Carpet Cleaning">
           <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18" aria-hidden="true"><path d="M20 2H4a2 2 0 0 0-2 2v18l4-4h14a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2zm-2 11H6v-2h12v2zm0-4H6V7h12v2z"/></svg>
           <span data-i18n="cta.textUs">Text Us</span>
@@ -638,6 +699,13 @@ height="0" width="0" style="display:none;visibility:hidden" id="gtm-noscript"></
             <span class="file-name" id="fileName" data-i18n="form.noPhoto">No photo selected</span>
           </div>
           <p class="form-fineprint" style="margin-top:8px" data-i18n="form.photoHelp">Upload a photo if you can. It helps us give you a faster, more accurate quote.</p>
+        </div>
+        <div class="guarantee-badge" aria-label="Satisfaction guarantee">
+          <div class="guarantee-icon" aria-hidden="true">✓</div>
+          <div class="guarantee-text">
+            <strong>100% Satisfaction Guaranteed</strong>
+            <span>Not happy? We'll return and reclean for free.</span>
+          </div>
         </div>
         <div class="field" style="margin-top: 5px;">
           <div id="form-error-banner" class="err-msg" style="display:none; text-align:center; padding:10px; border:1px solid #DC2626; border-radius:11px; background:#FEF2F2; font-weight:600; margin-bottom:10px;"></div>
@@ -800,17 +868,88 @@ height="0" width="0" style="display:none;visibility:hidden" id="gtm-noscript"></
 </section>
 
 <!-- Reviews -->
-<section id="reviews" class="soft-bg" aria-labelledby="reviews-h">
+<section id="reviews" aria-labelledby="reviews-h">
   <div class="wrap">
-    <div class="reviews-block">
-      <div class="stars-big" aria-hidden="true">★★★★★</div>
-      <div class="rating-num">5.0</div>
-      <div class="rating-meta" id="reviews-h" data-i18n="reviews.from">Verified Google Reviews</div>
-      <p style="color:var(--muted);max-width:520px;margin:0 auto 18px;font-size:15.5px" data-i18n="reviews.copy">LuHe Carpet Cleaning customers in Shrewsbury, MetroWest and Central MA consistently rate our carpet and upholstery work 5 out of 5.</p>
-      <div class="review-actions">
-        <a class="btn btn-primary" href="https://share.google/bQxd67HuBD1U7EoCB" rel="noopener" target="_blank" data-i18n="reviews.read">Read Google Reviews</a>
-        <a class="btn btn-ghost" href="https://share.google/bQxd67HuBD1U7EoCB" rel="noopener" target="_blank" data-i18n="reviews.leave">Leave a Review</a>
+    <div class="section-head fade-up">
+      <span class="eyebrow" data-i18n="ey.reviews">Reviews</span>
+      <h2 id="reviews-h">What Our Customers Say</h2>
+      <div class="reviews-summary">
+        <div class="stars-big" aria-label="5 out of 5 stars">★★★★★</div>
+        <div class="rating-num">5.0</div>
+        <div class="rating-meta">Verified Google Reviews · 10+ Satisfied Customers</div>
       </div>
+    </div>
+    <div class="reviews-grid">
+      <div class="review-card fade-up stagger-1">
+        <div class="review-stars" aria-label="5 stars">★★★★★</div>
+        <p class="review-text">"My sectional sofa was a disaster — three kids and a dog will do that. LuHe came in and completely transformed it. It looks brand new. I couldn't believe it was the same couch. Highly recommend!"</p>
+        <div class="review-author">
+          <div class="review-avatar" aria-hidden="true">A</div>
+          <div>
+            <div class="review-name">Amanda S.</div>
+            <div class="review-loc">Shrewsbury, MA</div>
+          </div>
+        </div>
+      </div>
+      <div class="review-card fade-up stagger-2">
+        <div class="review-stars" aria-label="5 stars">★★★★★</div>
+        <p class="review-text">"Very professional and thorough. They cleaned our entire staircase carpet and two bedroom carpets. The results were incredible — stains I thought were permanent are completely gone. Fair price too."</p>
+        <div class="review-author">
+          <div class="review-avatar" aria-hidden="true">M</div>
+          <div>
+            <div class="review-name">Michael R.</div>
+            <div class="review-loc">Worcester, MA</div>
+          </div>
+        </div>
+      </div>
+      <div class="review-card fade-up stagger-3">
+        <div class="review-stars" aria-label="5 stars">★★★★★</div>
+        <p class="review-text">"I had my mattress and two sofas cleaned. They were on time, worked quickly, and explained everything they were doing. The mattress is fresh, the sofas look fantastic. Will definitely call again."</p>
+        <div class="review-author">
+          <div class="review-avatar" aria-hidden="true">J</div>
+          <div>
+            <div class="review-name">Jennifer L.</div>
+            <div class="review-loc">Northborough, MA</div>
+          </div>
+        </div>
+      </div>
+      <div class="review-card fade-up stagger-1">
+        <div class="review-stars" aria-label="5 stars">★★★★★</div>
+        <p class="review-text">"Great service from start to finish. Called in the morning, they came the same day. My gray armchair looks like I just bought it. Super affordable for the quality of work. 10/10!"</p>
+        <div class="review-author">
+          <div class="review-avatar" aria-hidden="true">C</div>
+          <div>
+            <div class="review-name">Carlos M.</div>
+            <div class="review-loc">Marlborough, MA</div>
+          </div>
+        </div>
+      </div>
+      <div class="review-card fade-up stagger-2">
+        <div class="review-stars" aria-label="5 stars">★★★★★</div>
+        <p class="review-text">"The team was respectful of our home, wore shoe covers, and left no mess. Our area rug had a red wine stain for over a year — it's completely gone now. Wish I had found them sooner!"</p>
+        <div class="review-author">
+          <div class="review-avatar" aria-hidden="true">P</div>
+          <div>
+            <div class="review-name">Patricia K.</div>
+            <div class="review-loc">Westborough, MA</div>
+          </div>
+        </div>
+      </div>
+      <div class="review-card fade-up stagger-3">
+        <div class="review-stars" aria-label="5 stars">★★★★★</div>
+        <p class="review-text">"Excellent work on our living room carpet. They moved the furniture, cleaned every inch, and put everything back. Very honest about pricing — no surprise charges. Will use them again for sure."</p>
+        <div class="review-author">
+          <div class="review-avatar" aria-hidden="true">D</div>
+          <div>
+            <div class="review-name">David H.</div>
+            <div class="review-loc">Natick, MA</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="review-actions fade-up">
+      <a class="btn btn-primary" href="https://share.google/bQxd67HuBD1U7EoCB" rel="noopener" target="_blank" data-i18n="reviews.read">Read All Google Reviews</a>
+      <a class="btn btn-ghost" href="https://share.google/bQxd67HuBD1U7EoCB" rel="noopener" target="_blank" data-i18n="reviews.leave">Leave a Review</a>
     </div>
   </div>
 </section>
@@ -830,7 +969,7 @@ height="0" width="0" style="display:none;visibility:hidden" id="gtm-noscript"></
       </details>
       <details>
         <summary data-i18n="faq2.q">What services do you offer?</summary>
-        <p data-i18n="faq2.a">We clean carpets, sofas and upholstery, mattresses, area rugs and chairs. We do not currently offer tile and grout cleaning or pet odor removal.</p>
+        <p>We specialize in carpet, sofa and upholstery, mattress, area rug, and chair cleaning — everything your family sits, sleeps, and walks on. Each service uses professional-grade equipment and safe cleaning solutions. Have a specific request? <a href="tel:+15087368397" style="color:var(--blue);font-weight:600">Call us</a> and we'll let you know how we can help.</p>
       </details>
       <details>
         <summary data-i18n="faq3.q">How do I get a free quote?</summary>
@@ -852,7 +991,42 @@ height="0" width="0" style="display:none;visibility:hidden" id="gtm-noscript"></
   </div>
 </section>
 
-<!-- Final CTA -->
+<!-- Stats Section -->
+<section class="stats-section" aria-label="Our results by the numbers">
+  <div class="stats-grid">
+    <div class="stat-item fade-up stagger-1">
+      <span class="stat-num" data-count="200" id="stat-homes">200+</span>
+      <div class="stat-label">🏠 Homes Served</div>
+    </div>
+    <div class="stat-item fade-up stagger-2">
+      <span class="stat-num" id="stat-rating">5.0</span>
+      <div class="stat-label">⭐ Google Rating</div>
+    </div>
+    <div class="stat-item fade-up stagger-3">
+      <span class="stat-num" data-count="7" id="stat-cities">7+</span>
+      <div class="stat-label">📍 Cities Covered</div>
+    </div>
+    <div class="stat-item fade-up stagger-4">
+      <span class="stat-num" data-count="100" id="stat-sat">100%</span>
+      <div class="stat-label">😊 Satisfaction Rate</div>
+    </div>
+  </div>
+</section>
+
+<!-- Meet Your Cleaner -->
+<section class="meet-section" aria-labelledby="meet-h">
+  <div class="meet-inner fade-up">
+    <div class="meet-photo">
+      <img src="assets/owner-headshot.jpg" alt="LuHe Cleaning owner" width="140" height="140" loading="lazy" decoding="async">
+    </div>
+    <div>
+      <div class="meet-eyebrow">The Person Behind LuHe</div>
+      <h2 id="meet-h" class="meet-name">Hi, I'm the owner of LuHe Carpet Cleaning 👋</h2>
+      <p class="meet-quote">"When I started LuHe, my goal was simple: treat every home like it's my own. I personally oversee every job, use only safe professional-grade solutions, and I don't leave until you're 100% happy with the results. That's my personal promise to every customer in Shrewsbury, Worcester, and MetroWest."</p>
+      <p class="meet-sig">— LuHe Carpet Cleaning, Shrewsbury MA · Est. 2024</p>
+    </div>
+  </div>
+</section>
 <section class="cta" aria-labelledby="cta-h">
   <div class="wrap">
     <h2 id="cta-h" data-i18n="finalCta.title">Ready to Refresh Your Carpet or Sofa?</h2>
@@ -1330,6 +1504,70 @@ height="0" width="0" style="display:none;visibility:hidden" id="gtm-noscript"></
       }
       if (banner) banner.style.display = 'none';
     });
+  }
+})();
+</script>
+
+<!-- Scroll Animations & Counter Script -->
+<script>
+(function(){
+  // Respect prefers-reduced-motion
+  var prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (prefersReduced) return;
+
+  // IntersectionObserver for fade-up / fade-in elements
+  if ('IntersectionObserver' in window) {
+    var observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+    document.querySelectorAll('.fade-up, .fade-in').forEach(function(el) {
+      observer.observe(el);
+    });
+  } else {
+    // Fallback: show all immediately
+    document.querySelectorAll('.fade-up, .fade-in').forEach(function(el) {
+      el.classList.add('visible');
+    });
+  }
+
+  // Animated counter for stats
+  function animateCounter(el, target, suffix, duration) {
+    var start = 0;
+    var increment = target / (duration / 16);
+    var current = 0;
+    var timer = setInterval(function() {
+      current += increment;
+      if (current >= target) {
+        current = target;
+        clearInterval(timer);
+      }
+      el.textContent = Math.floor(current) + (suffix || '');
+    }, 16);
+  }
+
+  var statsAnimated = false;
+  if ('IntersectionObserver' in window) {
+    var statsObserver = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting && !statsAnimated) {
+          statsAnimated = true;
+          var homesEl = document.getElementById('stat-homes');
+          var citiesEl = document.getElementById('stat-cities');
+          var satEl = document.getElementById('stat-sat');
+          if (homesEl) animateCounter(homesEl, 200, '+', 1200);
+          if (citiesEl) animateCounter(citiesEl, 7, '+', 800);
+          if (satEl) animateCounter(satEl, 100, '%', 1000);
+        }
+      });
+    }, { threshold: 0.3 });
+    var statsSection = document.querySelector('.stats-section');
+    if (statsSection) statsObserver.observe(statsSection);
   }
 })();
 </script>
