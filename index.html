@@ -57,15 +57,20 @@
   }
 </script>
 <!-- Google Tag Manager -->
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer', window.SITE_CONFIG.GTM_ID);</script>
+<script>
+if(window.SITE_CONFIG&&window.SITE_CONFIG.GTM_ID&&window.SITE_CONFIG.GTM_ID!=='GTM-XXXXXXX'){
+  (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer',window.SITE_CONFIG.GTM_ID);
+}
+</script>
 <!-- End Google Tag Manager -->
 
 <!-- Meta Pixel Code -->
 <script>
+if(window.SITE_CONFIG&&window.SITE_CONFIG.META_PIXEL_ID&&window.SITE_CONFIG.META_PIXEL_ID!=='PIXEL_ID_HERE'){
   !function(f,b,e,v,n,t,s)
   {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
   n.callMethod.apply(n,arguments):n.queue.push(arguments)};
@@ -75,7 +80,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   s.parentNode.insertBefore(t,s)}(window, document,'script',
   'https://connect.facebook.net/en_US/fbevents.js');
 
-  // Set default consent for Meta Pixel based on localStorage
   var hasConsent = localStorage.getItem('luhe_consent') !== null;
   if (!hasConsent) {
     fbq('consent', 'revoke');
@@ -91,9 +95,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       fbq('consent', 'revoke');
     }
   }
-
   fbq('init', window.SITE_CONFIG.META_PIXEL_ID);
   fbq('track', 'PageView');
+}
 </script>
 <!-- End Meta Pixel Code -->
 <meta charset="utf-8">
@@ -120,6 +124,55 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <meta name="twitter:image" content="https://luhecleaning.com/assets/og-image.jpg">
 <link rel="preload" as="image" href="assets/before-after_sectional_beige_01.webp" fetchpriority="high">
 <link rel="dns-prefetch" href="https://wa.me">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "name": "LuHe Carpet Cleaning",
+  "image": "https://luhecleaning.com/assets/og-image.jpg",
+  "url": "https://luhecleaning.com",
+  "telephone": "+15087368397",
+  "email": "luhecleaning@gmail.com",
+  "description": "Professional carpet, sofa, mattress, rug and chair cleaning in Shrewsbury, Worcester and Central Massachusetts. Family-run local business with a 5.0 Google Rating.",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Shrewsbury",
+    "addressRegion": "MA",
+    "addressCountry": "US"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": 42.2973,
+    "longitude": -71.7190
+  },
+  "areaServed": [
+    {"@type": "City", "name": "Shrewsbury"},
+    {"@type": "City", "name": "Worcester"},
+    {"@type": "City", "name": "Northborough"},
+    {"@type": "City", "name": "Westborough"},
+    {"@type": "City", "name": "Marlborough"},
+    {"@type": "City", "name": "Natick"},
+    {"@type": "City", "name": "Bellingham"}
+  ],
+  "priceRange": "$$",
+  "openingHoursSpecification": {
+    "@type": "OpeningHoursSpecification",
+    "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],
+    "opens": "08:00",
+    "closes": "18:00"
+  },
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "5.0",
+    "bestRating": "5",
+    "ratingCount": "10"
+  },
+  "sameAs": [
+    "https://www.instagram.com/luhecarpetcleaning/",
+    "https://www.facebook.com/profile.php?id=61586350434713"
+  ]
+}
+</script>
 <style>
   :root{
     --blue:#0B6FB8;--dark:#063F6D;--ink:#0a1d33;--cyan:#0876A8;

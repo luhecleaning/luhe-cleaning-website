@@ -57,15 +57,20 @@
   }
 </script>
 <!-- Google Tag Manager -->
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer', window.SITE_CONFIG.GTM_ID);</script>
+<script>
+if(window.SITE_CONFIG&&window.SITE_CONFIG.GTM_ID&&window.SITE_CONFIG.GTM_ID!=='GTM-XXXXXXX'){
+  (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer',window.SITE_CONFIG.GTM_ID);
+}
+</script>
 <!-- End Google Tag Manager -->
 
 <!-- Meta Pixel Code -->
 <script>
+if(window.SITE_CONFIG&&window.SITE_CONFIG.META_PIXEL_ID&&window.SITE_CONFIG.META_PIXEL_ID!=='PIXEL_ID_HERE'){
   !function(f,b,e,v,n,t,s)
   {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
   n.callMethod.apply(n,arguments):n.queue.push(arguments)};
@@ -75,7 +80,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   s.parentNode.insertBefore(t,s)}(window, document,'script',
   'https://connect.facebook.net/en_US/fbevents.js');
 
-  // Set default consent for Meta Pixel based on localStorage
   var hasConsent = localStorage.getItem('luhe_consent') !== null;
   if (!hasConsent) {
     fbq('consent', 'revoke');
@@ -91,9 +95,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       fbq('consent', 'revoke');
     }
   }
-
   fbq('init', window.SITE_CONFIG.META_PIXEL_ID);
   fbq('track', 'PageView');
+}
 </script>
 <!-- End Meta Pixel Code -->
 <meta charset="utf-8">
