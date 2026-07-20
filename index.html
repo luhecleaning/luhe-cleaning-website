@@ -208,7 +208,8 @@ if(window.SITE_CONFIG&&window.SITE_CONFIG.META_PIXEL_ID&&window.SITE_CONFIG.META
   /* topbar */
   .topbar{background:var(--dark);color:#dceaf6;font-size:13.5px;padding:7px 18px}
   .topbar .row{max-width:1180px;margin:0 auto;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px 24px}
-  .topbar a{color:#fff;font-weight:600}
+  .topbar a{color:#fff;font-weight:600;display:inline-flex;align-items:center;gap:6px}
+  .topbar a svg{flex:none}
   .topbar .star{color:#FFC542}
   /* header */
   .site-header{position:sticky;top:0;background:#fff;border-bottom:1px solid var(--line);z-index:50}
@@ -344,27 +345,35 @@ if(window.SITE_CONFIG&&window.SITE_CONFIG.META_PIXEL_ID&&window.SITE_CONFIG.META
   details[open] summary::before{transform:translateY(-50%) rotate(90deg)}
   details p{padding:0 22px 18px 50px;color:var(--muted);font-size:15px;line-height:1.65}
   /* stats section */
-  .stats-section{background:linear-gradient(135deg,#052d4e 0%,#0B6FB8 100%);color:#fff;padding:52px 18px}
-  .stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;max-width:900px;margin:0 auto;text-align:center}
-  .stat-item{padding:16px 10px}
-  .stat-num{font-size:clamp(36px,5vw,54px);font-weight:900;color:#fff;letter-spacing:-.03em;line-height:1;display:block}
-  .stat-label{font-size:14px;color:rgba(255,255,255,.78);margin-top:6px;font-weight:600;letter-spacing:.02em}
-  @media(max-width:640px){.stats-grid{grid-template-columns:repeat(2,1fr)}}
+  .stats-section{background:linear-gradient(135deg,#052d4e 0%,#0B6FB8 100%);color:#fff;padding:64px 18px}
+  .stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;max-width:1100px;margin:0 auto;text-align:center}
+  .stat-card{background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);border-radius:20px;padding:28px 16px;display:flex;flex-direction:column;align-items:center;gap:12px;backdrop-filter:blur(8px);transition:transform .18s ease,background .18s ease}
+  .stat-card:hover{transform:translateY(-4px);background:rgba(255,255,255,0.09)}
+  .stat-icon{width:42px;height:42px;border-radius:50%;background:rgba(255,255,255,0.15);display:flex;align-items:center;justify-content:center;color:#fff;flex:none}
+  .stat-icon svg{width:18px;height:18px}
+  .stat-num{font-size:clamp(32px,3.8vw,44px);font-weight:900;color:#fff;letter-spacing:-.03em;line-height:1;display:block}
+  .stat-label{font-size:13.5px;color:rgba(255,255,255,.8);margin-top:2px;font-weight:600;letter-spacing:.02em}
+  @media(max-width:900px){.stats-grid{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:480px){.stats-grid{grid-template-columns:1fr;gap:16px}}
   /* guarantee badge */
   .guarantee-badge{display:flex;align-items:center;gap:10px;background:linear-gradient(135deg,#f0fdf4,#dcfce7);border:1.5px solid #86efac;border-radius:14px;padding:14px 18px;margin-top:14px;margin-bottom:6px}
   .guarantee-icon{width:38px;height:38px;border-radius:50%;background:#16A34A;color:#fff;display:flex;align-items:center;justify-content:center;flex:none;font-size:18px}
   .guarantee-text strong{display:block;font-size:14px;font-weight:800;color:#15803d}
   .guarantee-text span{font-size:12.5px;color:#166534}
-  /* meet section */
-  .meet-section{background:#fff;padding:64px 18px}
-  .meet-inner{max-width:900px;margin:0 auto;display:grid;grid-template-columns:auto 1fr;gap:40px;align-items:center;background:linear-gradient(135deg,#F4FAFF,#EAF6FF);border-radius:24px;padding:40px;border:1px solid var(--line)}
-  .meet-photo{width:140px;height:140px;border-radius:50%;overflow:hidden;border:4px solid #fff;box-shadow:var(--shadow);flex:none}
-  .meet-photo img{width:100%;height:100%;object-fit:cover}
-  .meet-eyebrow{font-size:12px;font-weight:700;color:var(--blue);text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px}
-  .meet-name{font-size:22px;font-weight:800;color:var(--dark);margin-bottom:10px}
-  .meet-quote{font-size:15.5px;color:var(--muted);line-height:1.7;font-style:italic;border-left:3px solid var(--blue);padding-left:16px}
-  .meet-sig{margin-top:14px;font-weight:700;color:var(--dark);font-size:15px}
-  @media(max-width:640px){.meet-inner{grid-template-columns:1fr;text-align:center}.meet-photo{margin:0 auto}.meet-quote{border-left:none;padding-left:0;border-top:3px solid var(--blue);padding-top:12px}}
+  /* promise section */
+  .promise-section{background:#fff;padding:72px 18px}
+  .promise-inner{max-width:1040px;margin:0 auto}
+  .promise-header{text-align:center;margin-bottom:44px}
+  .promise-header .eyebrow{display:inline-block;font-size:12px;font-weight:700;color:var(--blue);text-transform:uppercase;letter-spacing:.1em;margin-bottom:10px}
+  .promise-header h2{font-size:clamp(26px,3.2vw,36px);color:var(--dark);margin-bottom:0}
+  .promise-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+  .promise-card{background:linear-gradient(160deg,#F8FBFF,#EAF6FF);border:1px solid var(--line);border-radius:20px;padding:30px 26px;display:flex;flex-direction:column;gap:14px;transition:transform .18s ease,box-shadow .18s ease}
+  .promise-card:hover{transform:translateY(-4px);box-shadow:var(--shadow)}
+  .promise-icon{width:48px;height:48px;border-radius:14px;background:linear-gradient(135deg,var(--blue),var(--cyan));display:flex;align-items:center;justify-content:center;flex:none}
+  .promise-icon svg{width:24px;height:24px;color:#fff}
+  .promise-card h3{font-size:16px;font-weight:800;color:var(--dark);margin:0}
+  .promise-card p{font-size:14.5px;color:var(--muted);line-height:1.65;margin:0}
+  @media(max-width:768px){.promise-grid{grid-template-columns:1fr;gap:16px}}
   /* final cta */
   .cta{background:linear-gradient(120deg,#063F6D 0%,#0B6FB8 100%);color:#fff;text-align:center;padding:64px 18px}
   .cta h2{color:#fff;margin-bottom:10px}
@@ -604,7 +613,7 @@ height="0" width="0" style="display:none;visibility:hidden" id="gtm-noscript"></
       <button type="button" class="lang-btn" data-lang="pt" aria-label="Português"><svg class="flag" viewBox="0 0 14 10" width="16" height="11" aria-hidden="true"><rect width="14" height="10" fill="#009C3B"/><polygon points="7,1 13,5 7,9 1,5" fill="#FFDF00"/><circle cx="7" cy="5" r="1.8" fill="#002776"/></svg><span class="lang-code">PT</span></button>
       <button type="button" class="lang-btn" data-lang="es" aria-label="Español"><svg class="flag" viewBox="0 0 14 10" width="16" height="11" aria-hidden="true"><rect width="14" height="10" fill="#AA151B"/><rect y="2.5" width="14" height="5" fill="#F1BF00"/></svg><span class="lang-code">ES</span></button>
     </span>
-    <a href="tel:+15087368397" aria-label="Call LuHe Carpet Cleaning at 508-736-8397">📞 (508) 736-8397</a>
+    <a href="tel:+15087368397" aria-label="Call LuHe Carpet Cleaning at 508-736-8397"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>(508) 736-8397</a>
   </div>
 </div>
 
@@ -994,36 +1003,66 @@ height="0" width="0" style="display:none;visibility:hidden" id="gtm-noscript"></
 <!-- Stats Section -->
 <section class="stats-section" aria-label="Our results by the numbers">
   <div class="stats-grid">
-    <div class="stat-item fade-up stagger-1">
+    <div class="stat-card fade-up stagger-1">
+      <div class="stat-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      </div>
       <span class="stat-num" data-count="200" id="stat-homes">200+</span>
-      <div class="stat-label">🏠 Homes Served</div>
+      <div class="stat-label">Homes Served</div>
     </div>
-    <div class="stat-item fade-up stagger-2">
+    <div class="stat-card fade-up stagger-2">
+      <div class="stat-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+      </div>
       <span class="stat-num" id="stat-rating">5.0</span>
-      <div class="stat-label">⭐ Google Rating</div>
+      <div class="stat-label">Google Rating</div>
     </div>
-    <div class="stat-item fade-up stagger-3">
+    <div class="stat-card fade-up stagger-3">
+      <div class="stat-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+      </div>
       <span class="stat-num" data-count="7" id="stat-cities">7+</span>
-      <div class="stat-label">📍 Cities Covered</div>
+      <div class="stat-label">Cities Covered</div>
     </div>
-    <div class="stat-item fade-up stagger-4">
+    <div class="stat-card fade-up stagger-4">
+      <div class="stat-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 11 2 2 4-4"/></svg>
+      </div>
       <span class="stat-num" data-count="100" id="stat-sat">100%</span>
-      <div class="stat-label">😊 Satisfaction Rate</div>
+      <div class="stat-label">Satisfaction Rate</div>
     </div>
   </div>
 </section>
 
-<!-- Meet Your Cleaner -->
-<section class="meet-section" aria-labelledby="meet-h">
-  <div class="meet-inner fade-up">
-    <div class="meet-photo">
-      <img src="assets/owner-headshot.jpg" alt="LuHe Cleaning owner" width="140" height="140" loading="lazy" decoding="async">
+<!-- Our Promise -->
+<section class="promise-section" aria-labelledby="promise-h">
+  <div class="promise-inner">
+    <div class="promise-header fade-up">
+      <div class="eyebrow">Why LuHe</div>
+      <h2 id="promise-h">Our Promise to Every Customer</h2>
     </div>
-    <div>
-      <div class="meet-eyebrow">The Person Behind LuHe</div>
-      <h2 id="meet-h" class="meet-name">Hi, I'm the owner of LuHe Carpet Cleaning 👋</h2>
-      <p class="meet-quote">"When I started LuHe, my goal was simple: treat every home like it's my own. I personally oversee every job, use only safe professional-grade solutions, and I don't leave until you're 100% happy with the results. That's my personal promise to every customer in Shrewsbury, Worcester, and MetroWest."</p>
-      <p class="meet-sig">— LuHe Carpet Cleaning, Shrewsbury MA · Est. 2024</p>
+    <div class="promise-grid">
+      <div class="promise-card fade-up stagger-1">
+        <div class="promise-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-5-7-12a7 7 0 0 1 14 0c0 7-7 12-7 12z"/><circle cx="12" cy="9" r="2.5"/></svg>
+        </div>
+        <h3>We treat your home with respect</h3>
+        <p>We arrive on time, protect your floors and furniture, and clean up after ourselves. Your home is left exactly as we found it — only cleaner.</p>
+      </div>
+      <div class="promise-card fade-up stagger-2">
+        <div class="promise-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22c5.52 0 10-4.48 10-10S17.52 2 12 2 2 6.48 2 12s4.48 10 10 10z"/><path d="m9 12 2 2 4-4"/></svg>
+        </div>
+        <h3>Honest pricing, always upfront</h3>
+        <p>You receive a clear quote before any work begins. No surprise fees, no upsells, no pressure. The price we quote is the price you pay.</p>
+      </div>
+      <div class="promise-card fade-up stagger-3">
+        <div class="promise-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        </div>
+        <h3>100% satisfaction guaranteed</h3>
+        <p>If you are not completely satisfied with the results, we will return and reclean the area at no charge. Your satisfaction is non-negotiable for us.</p>
+      </div>
     </div>
   </div>
 </section>
