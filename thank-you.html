@@ -4,12 +4,12 @@
 <!-- SITE_CONFIG and Google Analytics / Consent Mode / GTM -->
 <script>
   window.SITE_CONFIG = {
-    GTM_ID: 'GTM-XXXXXXX', // Replace with real Google Tag Manager ID
+    GTM_ID: 'GTM-NC276XVT', // Replace with real Google Tag Manager ID
     GA4_ID: 'G-XXXXXXXXXX', // Replace with real Google Analytics 4 ID
-    GOOGLE_ADS_ID: 'AW-XXXXXXXXXX', // Replace with real Google Ads ID
-    GOOGLE_ADS_FORM_CONVERSION_LABEL: 'AW-FORM-CONVERSION-LABEL',
+    GOOGLE_ADS_ID: 'AW-18311925735', // Google Ads ID
+    GOOGLE_ADS_FORM_CONVERSION_LABEL: 'dS8eCPOyztgcEOef55tE',
     GOOGLE_ADS_PHONE_CONVERSION_LABEL: 'AW-PHONE-CONVERSION-LABEL',
-    META_PIXEL_ID: '4530378247283826'
+    META_PIXEL_ID: '1378375304359354'
   };
 
   // Google Consent Mode v2 Default Setup
@@ -43,19 +43,34 @@
     }
   }
 
-  // Load GA4 directly if configured
-  if (window.SITE_CONFIG && window.SITE_CONFIG.GA4_ID && window.SITE_CONFIG.GA4_ID !== 'G-XXXXXXXXXX') {
-    var gaScript = document.createElement('script');
-    gaScript.async = true;
-    gaScript.src = 'https://www.googletagmanager.com/gtag/js?id=' + window.SITE_CONFIG.GA4_ID;
-    document.head.appendChild(gaScript);
+  // Load the Google tag for Google Ads and GA4 (when configured)
+  var hasGA4 = window.SITE_CONFIG && window.SITE_CONFIG.GA4_ID && window.SITE_CONFIG.GA4_ID !== 'G-XXXXXXXXXX';
+  var hasGoogleAds = window.SITE_CONFIG && window.SITE_CONFIG.GOOGLE_ADS_ID && window.SITE_CONFIG.GOOGLE_ADS_ID !== 'AW-XXXXXXXXXX';
+  var googleTagId = hasGA4 ? window.SITE_CONFIG.GA4_ID : (hasGoogleAds ? window.SITE_CONFIG.GOOGLE_ADS_ID : null);
+
+  if (googleTagId) {
+    var googleTagScript = document.createElement('script');
+    googleTagScript.async = true;
+    googleTagScript.src = 'https://www.googletagmanager.com/gtag/js?id=' + googleTagId;
+    document.head.appendChild(googleTagScript);
     gtag('js', new Date());
-    gtag('config', window.SITE_CONFIG.GA4_ID);
-    if (window.SITE_CONFIG.GOOGLE_ADS_ID && window.SITE_CONFIG.GOOGLE_ADS_ID !== 'AW-XXXXXXXXXX') {
+
+    if (hasGA4) {
+      gtag('config', window.SITE_CONFIG.GA4_ID);
+    }
+    if (hasGoogleAds) {
       gtag('config', window.SITE_CONFIG.GOOGLE_ADS_ID);
     }
   }
 </script>
+<!-- Google Ads conversion: lead form submitted -->
+<script>
+  gtag('event', 'conversion', {
+    'send_to': 'AW-18311925735/dS8eCPOyztgcEOef55tE'
+  });
+</script>
+<!-- End Google Ads conversion -->
+
 <!-- Google Tag Manager -->
 <script>
 if(window.SITE_CONFIG&&window.SITE_CONFIG.GTM_ID&&window.SITE_CONFIG.GTM_ID!=='GTM-XXXXXXX'){
@@ -133,10 +148,10 @@ if(window.SITE_CONFIG&&window.SITE_CONFIG.META_PIXEL_ID&&window.SITE_CONFIG.META
 </head>
 <body>
 <!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-XXXXXXX"
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NC276XVT"
 height="0" width="0" style="display:none;visibility:hidden" id="gtm-noscript"></iframe></noscript>
 <!-- Meta Pixel (noscript) -->
-<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=PIXEL_ID_HERE&ev=PageView&noscript=1" id="fb-noscript"></noscript>
+<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1378375304359354&ev=PageView&noscript=1" id="fb-noscript"></noscript>
 <script>
   // Dynamically update noscript components if configuration matches
   var noscriptIframe = document.getElementById('gtm-noscript');
