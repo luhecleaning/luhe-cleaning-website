@@ -23,49 +23,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 })(window,document,'script','dataLayer','GTM-NC276XVT');</script>
 <!-- End Google Tag Manager -->
   
-  // Google Consent Mode v2 Default Setup
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
   
-  if (localStorage.getItem('luhe_consent') === null) {
-    gtag('consent', 'default', {
-      'ad_storage': 'denied',
-      'analytics_storage': 'denied',
-      'ad_user_data': 'denied',
-      'ad_personalization': 'denied',
-      'wait_for_update': 500
-    });
-  } else {
-    try {
-      var savedConsent = JSON.parse(localStorage.getItem('luhe_consent'));
-      gtag('consent', 'default', {
-        'ad_storage': savedConsent.ad_storage || 'denied',
-        'analytics_storage': savedConsent.analytics_storage || 'denied',
-        'ad_user_data': savedConsent.ad_user_data || 'denied',
-        'ad_personalization': savedConsent.ad_personalization || 'denied'
-      });
-    } catch(e) {
-      gtag('consent', 'default', {
-        'ad_storage': 'denied',
-        'analytics_storage': 'denied',
-        'ad_user_data': 'denied',
-        'ad_personalization': 'denied'
-      });
-    }
-  }
-
-  // Load GA4 directly if configured
-  if (window.SITE_CONFIG && window.SITE_CONFIG.GA4_ID && window.SITE_CONFIG.GA4_ID !== 'G-XXXXXXXXXX') {
-    var gaScript = document.createElement('script');
-    gaScript.async = true;
-    gaScript.src = 'https://www.googletagmanager.com/gtag/js?id=' + window.SITE_CONFIG.GA4_ID;
-    document.head.appendChild(gaScript);
-    gtag('js', new Date());
-    gtag('config', window.SITE_CONFIG.GA4_ID);
-    if (window.SITE_CONFIG.GOOGLE_ADS_ID && window.SITE_CONFIG.GOOGLE_ADS_ID !== 'AW-XXXXXXXXXX') {
-      gtag('config', window.SITE_CONFIG.GOOGLE_ADS_ID);
-    }
-  }
 </script>
 <!-- Google Tag Manager -->
 <script>
