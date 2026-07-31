@@ -9,7 +9,7 @@
     GOOGLE_ADS_ID: 'AW-XXXXXXXXXX', // Replace with real Google Ads ID
     GOOGLE_ADS_FORM_CONVERSION_LABEL: 'AW-FORM-CONVERSION-LABEL',
     GOOGLE_ADS_PHONE_CONVERSION_LABEL: 'AW-PHONE-CONVERSION-LABEL',
-    META_PIXEL_ID: ''
+    META_PIXEL_ID: '4530378247283826'
   };
 
   // Google Consent Mode v2 Default Setup
@@ -43,8 +43,6 @@
     }
   }
 
-
-  
   // Load GA4 directly if configured
   if (window.SITE_CONFIG && window.SITE_CONFIG.GA4_ID && window.SITE_CONFIG.GA4_ID !== 'G-XXXXXXXXXX') {
     var gaScript = document.createElement('script');
@@ -70,33 +68,38 @@ if(window.SITE_CONFIG&&window.SITE_CONFIG.GTM_ID&&window.SITE_CONFIG.GTM_ID!=='G
 </script>
 <!-- End Google Tag Manager -->
 
-  <!-- Google Tag Manager -->
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-NC276XVT');</script>
-<!-- End Google Tag Manager -->
-  
 <!-- Meta Pixel Code -->
 <script>
-!function(f,b,e,v,n,t,s)
-{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-n.queue=[];t=b.createElement(e);t.async=!0;
-t.src=v;s=b.getElementsByTagName(e)[0];
-s.parentNode.insertBefore(t,s)}(window, document,'script',
-'https://connect.facebook.net/en_US/fbevents.js');
-fbq('init', '1378375304359354');
-fbq('track', 'PageView');
-</script>
-<noscript><img height="1" width="1" style="display:none"
-src="https://www.facebook.com/tr?id=1378375304359354&ev=PageView&noscript=1"
-/></noscript>
-<!-- End Meta Pixel Code -->
-  
+if(window.SITE_CONFIG&&window.SITE_CONFIG.META_PIXEL_ID&&window.SITE_CONFIG.META_PIXEL_ID!=='PIXEL_ID_HERE'){
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
 
+  var hasConsent = localStorage.getItem('luhe_consent') !== null;
+  if (!hasConsent) {
+    fbq('consent', 'revoke');
+  } else {
+    try {
+      var savedConsent = JSON.parse(localStorage.getItem('luhe_consent'));
+      if (savedConsent.ad_storage === 'granted') {
+        fbq('consent', 'grant');
+      } else {
+        fbq('consent', 'revoke');
+      }
+    } catch(e) {
+      fbq('consent', 'revoke');
+    }
+  }
+  fbq('init', window.SITE_CONFIG.META_PIXEL_ID);
+  fbq('track', 'PageView');
+}
+</script>
+<!-- End Meta Pixel Code -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#0B6FB8">
@@ -129,12 +132,6 @@ src="https://www.facebook.com/tr?id=1378375304359354&ev=PageView&noscript=1"
 </script>
 </head>
 <body>
-
-  <!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NC276XVT"
-height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<!-- End Google Tag Manager (noscript) -->
-  
 <!-- Google Tag Manager (noscript) -->
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-XXXXXXX"
 height="0" width="0" style="display:none;visibility:hidden" id="gtm-noscript"></iframe></noscript>
